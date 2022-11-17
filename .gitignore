@@ -1,0 +1,11 @@
+
+# Server ignores
+
+/server/node_modules
+/server/.env
+
+
+# Ui ignores
+
+/ui/node_modules
+/ui/.env
