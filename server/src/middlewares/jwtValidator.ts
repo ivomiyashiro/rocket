@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { IAuthRequest } from 'types';
 
-export const jwtValidator = (req: Request, res: Response, next: NextFunction) => {
+export const jwtValidator = (req: IAuthRequest, res: Response, next: NextFunction) => {
 
   const token = req.header('x-token');
 
@@ -28,5 +29,4 @@ export const jwtValidator = (req: Request, res: Response, next: NextFunction) =>
   }
 
   return next();
-
 };
