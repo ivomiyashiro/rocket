@@ -16,7 +16,7 @@ export const jwtValidator = (req: IAuthRequest, res: Response, next: NextFunctio
   try {
     const { uid, name, role } = jwt.verify(
       token,
-      process.env.SECRET_JWT_SEED as string
+      process.env.JWT_SECRET as string
     ) as JwtPayload;
 
     req.auth = { uid, name, role };
