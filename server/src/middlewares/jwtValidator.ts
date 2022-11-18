@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { IAuthRequest } from 'types';
+import { IAuthRequest } from 'interfaces';
 
 export const jwtValidator = (req: IAuthRequest, res: Response, next: NextFunction) => {
 

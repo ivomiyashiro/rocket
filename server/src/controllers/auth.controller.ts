@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import User from '../models/User.model';
 import { generateJWT } from '../helpers';
-import { IAuthRequest } from '../types';
+import { IAuthRequest } from '../interfaces';
 
 export const createUser = async (req: Request, res: Response) => {
 
