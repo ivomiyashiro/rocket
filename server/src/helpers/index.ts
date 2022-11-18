@@ -1,1 +1,2 @@
-export * from './generateJWT.helper';
+export * from './genJWT.helper';
+export * from './genPassword.helper';
