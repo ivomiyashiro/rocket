@@ -2,12 +2,13 @@ import express from 'express';
 import { config } from 'dotenv'; config();
 import cors from 'cors';
 
-import AuthRouter from './routes/auth.route';
+import { AuthRouter } from './routes';
+import { dbConnection } from './database/config';
 
 const app = express();
 
 // DB Conn
-
+dbConnection();
 
 // Config
 app.use(cors({ origin: '*' }));
