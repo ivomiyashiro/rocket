@@ -15,7 +15,7 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Routes
-app.get('/auth', AuthRouter);
+app.use('/api/auth', AuthRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running in port ${ process.env.PORT }`);
