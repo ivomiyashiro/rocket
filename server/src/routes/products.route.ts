@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 import { validateFields, validateJWTSuperAdmin } from '../middlewares';
-import { createProduct, getAllProducts, getOneProduct } from '../controllers/products.controller';
+import { createProduct, deleteProduct, getAllProducts, getOneProduct, updateProduct } from '../controllers/products.controller';
 
 const router = Router();
  
@@ -23,8 +23,8 @@ router.post(
   createProduct
 );
 
-router.delete('/:id');
+router.delete('/:id', deleteProduct);
 
-router.put('/:id');
+router.put('/:id', updateProduct);
  
 export default router;
