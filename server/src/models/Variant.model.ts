@@ -1,7 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema } from 'mongoose';
 import { IVariant } from '../interfaces';
 
-const VariantScheme = new Schema<IVariant>({
+export const VariantScheme = new Schema<IVariant>({
   name: {
     type: String,
     required: true
@@ -31,5 +31,3 @@ const VariantScheme = new Schema<IVariant>({
     updatedAt: 'updated_at'
   }
 });
-
-export default model<IVariant>('Variant', VariantScheme);

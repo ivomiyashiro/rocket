@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IProduct } from '../interfaces';
-import ProductVariant from './Variant.model';
+import { VariantScheme } from './Variant.model';
+
 
 const ProductSchema = new Schema<IProduct>({
   title: {
@@ -23,7 +24,7 @@ const ProductSchema = new Schema<IProduct>({
     default: []
   },
   variants: {
-    type: [ProductVariant.schema],
+    type: [VariantScheme],
     default: null
   },
   category: {
