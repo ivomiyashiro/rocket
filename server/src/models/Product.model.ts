@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IProduct } from '../interfaces';
-import ProductVariant from './Variant';
+import ProductVariant from './Variant.model';
 
 const ProductSchema = new Schema<IProduct>({
   title: {

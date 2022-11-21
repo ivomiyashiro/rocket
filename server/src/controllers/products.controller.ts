@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import Variant from 'models/Variant';
-import Product from '../models/Product.model';
+import { Product, Variant } from '../models';
 
 const DEFAULT_LIMIT = 10;
 const DEFAULT_PAGE = 1;
