@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { fieldsValidator, jwtValidator } from '../middlewares';
+import { validateFields, validateJWT } from '../middlewares';
 
 import { signUp, singIn, renewUser, googleOauthHandler } from '../controllers/auth.controller';
  
@@ -14,7 +14,7 @@ router.post(
     check('email', 'Email is required.').isEmail(),
     check('password', 'Password is required.').not().isEmpty(),
     check('password', 'Password is required.').isLength({ min: 6 }),
-    fieldsValidator
+    validateFields
   ],
   signUp
 );
@@ -24,12 +24,12 @@ router.post(
   [
     check('email', 'Email is required.').isEmail(),
     check('password', 'Password is required.').isLength({ min: 6 }),
-    fieldsValidator
+    validateFields
   ],
   singIn
 );
  
-router.get('/renew', jwtValidator, renewUser);
+router.get('/renew', validateJWT, renewUser);
 
 router.get('/signin/google', googleOauthHandler);
  
