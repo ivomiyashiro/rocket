@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Product, Variant } from '../models';
+import { Product } from '../models';
 
 const DEFAULT_LIMIT = 10;
 const DEFAULT_PAGE = 1;
@@ -65,9 +65,7 @@ export const getOneProduct = async (req: Request, res: Response) => {
 
 export const createProduct = async (req: Request, res: Response) => {
 
-  const { variants, ...rest } = req.body;
   try {
-    const variant = new Variant(variants);
     const product = new Product(req.body);
     await product.save();
 
@@ -76,6 +74,51 @@ export const createProduct = async (req: Request, res: Response) => {
       product
     });
     
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      ok: false,
+      msg: 'Internal server error.'
+    });
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+
+  const productsIDs = req.params.id;
+
+  try {
+    const { deletedCount } = await Product.deleteMany({ id: { $in: productsIDs } });
+
+    return res.json({
+      ok: true,
+      msg: `${ deletedCount } products deleted.`
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      ok: false,
+      msg: 'Internal server error.'
+    });
+  }
+};
+
+export const updateProduct = async (req: Request, res: Response) => {
+  
+  const id = req.params.id;
+  const update = req.body.data;
+
+  try {
+    await Product.findOneAndUpdate({ id }, update);
+
+    return res.json({
+      ok: true,
+      msg: 'Product updated.'
+    });
+
   } catch (error) {
     console.log(error);
 
