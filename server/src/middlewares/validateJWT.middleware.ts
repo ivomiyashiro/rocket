@@ -2,9 +2,10 @@ import { NextFunction, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { IAuthRequest } from 'interfaces';
 
-export const jwtValidator = (req: IAuthRequest, res: Response, next: NextFunction) => {
+export const validateJWT = (req: IAuthRequest, res: Response, next: NextFunction) => {
 
-  const token = req.header('x-token');
+  const token = req.cookies;
+  console.log(token);
 
   if (!token) {
     return res.status(401).json({
@@ -21,12 +22,12 @@ export const jwtValidator = (req: IAuthRequest, res: Response, next: NextFunctio
 
     req.auth = { uid, name, role };
 
+    return next();
+    
   } catch (error) {
     return res.status(401).json({
       ok: false,
       msg: 'Unauthorized request.'
     });
   }
-
-  return next();
 };
