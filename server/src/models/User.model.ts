@@ -1,15 +1,8 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { IUser } from '../interfaces';
 
-interface IUser extends Document {
-  name: string,
-  email: string,
-  password: string,
-  role: 'CUSTOMER' | 'ADMIN' | 'SUPERADMIN',
-  comparePassword: (password: string) => Promise<boolean>
-}
-
-const UserSchema = new Schema({
+const UserSchema = new Schema<IUser>({
   name: {
     type: String,
     required: true
