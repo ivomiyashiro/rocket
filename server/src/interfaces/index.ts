@@ -37,3 +37,21 @@ export interface IVariant {
   barcode: string;
   image: string;
 }
+
+export interface IOrder {
+  productsIDs: string[];
+  totalPrice: number;
+  status: 'DELIVERED' | 'PENDING' | 'CANCELLED';
+  phoneNumber: string;
+  customer: {
+    name: string;
+    email: string;
+  };
+  shippingAddress: {
+    city: string;
+    locality: string;
+    address: string;
+    apartment?: string;
+    zip: string;
+  }
+}
