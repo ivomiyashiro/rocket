@@ -93,7 +93,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
     return res.json({
       ok: true,
-      msg: `${ deletedCount } products deleted.`
+      msg: `${ deletedCount } product/s deleted.`
     });
 
   } catch (error) {
@@ -128,3 +128,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
+// export const searchProduct = (req: Request, res: Response) => {
+  
+// };
