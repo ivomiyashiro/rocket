@@ -3,8 +3,8 @@ import { config } from 'dotenv'; config();
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { AuthRouter, ProductsRouter } from './routes';
 import { dbConnection } from './database/config';
+import { AuthRouter, OrdersRouter, ProductsRouter, UserRouter } from './routes';
 
 const app = express();
 
@@ -18,7 +18,9 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', AuthRouter);
+app.use('/api/user', UserRouter);
 app.use('/api/products', ProductsRouter);
+app.use('/api/orders', OrdersRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running in port ${ process.env.PORT }`);
