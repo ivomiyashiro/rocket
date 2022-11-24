@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { check } from 'express-validator';
 import { isValidOrderStatus } from '../helpers';
 import { validateFields, validateJWTAdmin, validateJWTCustomer } from '../middlewares';
-import { createOrder, getAllOrders, getOneOrder, updateOrderStatus } from '../controllers/orders.controller';
+import { createOrder, getAllOrders, getOneOrder, searchOrder, updateOrderStatus } from '../controllers/orders.controller';
 
 const router = Router();
 
@@ -28,6 +28,8 @@ router.use(validateJWTAdmin);
 router.get('/', getAllOrders);
  
 router.get('/:id', getOneOrder);
+
+router.get('/search/:search', searchOrder);
 
 router.put(
   '/:id', 
