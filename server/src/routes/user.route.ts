@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { validateCustomer } from '../middlewares';
-import { getCustomerOrder, getCustomerOrders } from '../controllers/user.controller';
+import { validateCustomer, validateJWTAdmin } from '../middlewares';
+import { getAllUsers, getCustomerOrder, getCustomerOrders } from '../controllers/user.controller';
  
 const router = Router();
+
+router.get('/', validateJWTAdmin, getAllUsers);
 
 router.get('/:uid/orders', validateCustomer, getCustomerOrders);
 
