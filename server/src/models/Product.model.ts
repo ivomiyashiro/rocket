@@ -27,6 +27,10 @@ const ProductSchema = new Schema<IProduct>({
     type: [VariantScheme],
     default: null
   },
+  vendor: {
+    type: String,
+    required: true
+  },
   category: {
     type: String,
     required: true
