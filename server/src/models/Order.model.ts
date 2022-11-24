@@ -2,6 +2,11 @@ import { Schema, model } from 'mongoose';
 import { IOrder } from '../interfaces';
 
 const OrderScheme = new Schema<IOrder>({
+  number: {
+    type: String,
+    unique: true,
+    require: true
+  },
   productsIDs: {
     type: [String],
     requied: true
