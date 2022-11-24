@@ -22,7 +22,7 @@ export interface IProduct {
   description: string;
   options: { name: string; values: string[] }[]
   variants: IVariant[];
-  brand: string;
+  vendor: string;
   category: string;
   status: 'ACTIVE' | 'INACTIVE';
   images: string[];
@@ -38,7 +38,8 @@ export interface IVariant {
   image: string;
 }
 
-export interface IOrder {
+export interface IOrder extends Document {
+  number: string;
   productsIDs: string[];
   totalPrice: number;
   status: 'DELIVERED' | 'PENDING' | 'CANCELLED';
