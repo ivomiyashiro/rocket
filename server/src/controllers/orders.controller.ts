@@ -67,7 +67,11 @@ export const createOrder = async (req: IAuthRequest, res: Response) => {
 
   try {
     const customer = await User.findById(req.auth?.uid, 'name email');
-    const order = new Order({ ...req.body, customer });
+    const order = new Order({ 
+      ...req.body,
+      customer,
+      number: new Date().getTime().toString()
+    });
     await order.save();
 
     return res.json({
@@ -108,8 +112,39 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
   }
 };
 
-// export const searchOrder = (req: Request, res:Response) => {
-  
-// }
+export const searchOrder = async (req: Request, res: Response) => {
+
+  const { sortBy: reqSortBy, orderBy: reqOrderBy, limit: reqLimit, page: reqPage }: any = req.query;
+
+  const search = req.params.search || '';
+  const orderBy = reqOrderBy || DEFAULT_ORDER_BY;
+  const sortBy = reqSortBy || DEFAULT_SORT_BY;
+  const limit = Number(reqLimit) || DEFAULT_LIMIT;
+  const page = Number(reqPage) || DEFAULT_PAGE;
+
+  try {
+    const orders = await Order.find({ number: { $regex: search, $options: 'i' } })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .sort([[sortBy, orderBy]])
+      .exec();
+
+    const count = await Order.count();
+
+    return res.json({
+      ok: true,
+      orders,
+      totalPages: Math.ceil(count / limit)
+    });
+    
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      ok: false,
+      msg: 'Internal server error.'
+    });
+  }
+};
 
 
