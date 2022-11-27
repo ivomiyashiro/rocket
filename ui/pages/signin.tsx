@@ -7,7 +7,7 @@ const SigninPage = () => {
   return (
     <>
       <Head>  
-        <title>Signin - Rocket</title>
+        <title>Sign In - Rocket</title>
         <meta name="description" content="Signin to Rocket." />
       </Head>
       <div className='w-full h-screen flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-500'>
@@ -20,12 +20,13 @@ const SigninPage = () => {
 export default SigninPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
-  const token = req.cookies.token || '';
+
+  const token = req.headers.cookie || '';
   const { user } = await checkDBToken({ token });
 
   const { p = '/' } = query;
 
-  if (user) {
+  if (!!user) {
     return {
       redirect: {
         destination: p.toString(),
