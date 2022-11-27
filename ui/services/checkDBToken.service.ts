@@ -6,7 +6,9 @@ export const checkDBToken = async ({ token }: { token: string }) => {
     const { data } = await axios.post(
       process.env.NEXT_PUBLIC_SERVER_ENDPOINT as string + '/auth/renew', {}, { 
         withCredentials: true,
-        headers: { Cookie: '' }
+        headers: {
+          Cookie: `token=${ token }`
+        }
       }
     );
 
