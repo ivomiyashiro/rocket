@@ -22,21 +22,22 @@ export default SigninPage;
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 
   const token = req.headers.cookie || '';
-  
+
   try {
-    const { user } = await checkDBToken({ token });
+    if (!!token) {
+      const { user } = await checkDBToken({ token });
 
-    const { p = '/' } = query;
+      const { p = '/' } = query;
 
-    if (!!user) {
-      return {
-        redirect: {
-          destination: p.toString(),
-          permanent: false
-        }
-      };
+      if (!!user) {
+        return {
+          redirect: {
+            destination: p.toString(),
+            permanent: false
+          }
+        };
+      }
     }
-
   } catch (error) {
     console.log(error);
   }
