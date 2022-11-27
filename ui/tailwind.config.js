@@ -8,7 +8,7 @@ module.exports = {
         'signin-window': '400px'
       },
       maxHeight: {
-        'signin-window': '500px'
+        'signin-window': '550px'
       }
     },
   },
