@@ -51,14 +51,14 @@ export const singIn = async (req: Request, res: Response) => {
 
     if (!user) return res.status(400).json({
       ok: false,
-      msg: 'Email or password incorrect.',
+      msg: 'Email or password are incorrect.',
     });
 
-    const isValidPassword = user.comparePassword(password);
+    const isValidPassword = await user.comparePassword(password);
 
     if (!isValidPassword) return res.status(400).json({
       ok: false,
-      msg: 'Email or password incorrect.'
+      msg: 'Email or password are incorrect.'
     });
 
     const token = await genJWT({ uid: user.id, name: user.name, role: user.role  });
@@ -84,16 +84,25 @@ export const singIn = async (req: Request, res: Response) => {
   }
 };
 
-export const renewUser = async (req: IAuthRequest, res: Response) => {
+export const renewToken = async (req: IAuthRequest, res: Response) => {
 
   try {
     if (!req.auth) throw new Error;
     const { uid, name, role } = req.auth;
 
     const token = await genJWT({ uid, name, role });
+    const user = await User.findById(uid);
     res.cookie('token', token);
 
-    return res.json({ ok: true });
+    return res.json({ 
+      ok: true,
+      user: {
+        uid: user?.id,
+        email: user?.email,
+        name: user?.name,
+        role: user?.role
+      }
+    });
 
   } catch (error) {
     console.log(error);
