@@ -5,9 +5,8 @@ interface ContextProps {
     isLoading: boolean;
     isLoggedIn: boolean;
     user?: IUser;
-    signin: any
-    // signin: (email: string, password: string) => Promise<{error: boolean; message?: string;}>;
-    // signup: (name: string, email: string, password: string) => Promise<{error: boolean; message?: string;}>;
+    signin: ({ email, password }: { email: string; password: string }) => Promise<void>
+    signup: ({ name, email, password }: { name: string; email: string; password: string }) => Promise<void>
     // signout: () => void;
 }
 

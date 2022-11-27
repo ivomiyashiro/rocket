@@ -5,10 +5,12 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        'signin-window': '400px'
+        'signin-window': '400px',
+        'signup-window': '400px'
       },
       maxHeight: {
-        'signin-window': '550px'
+        'signin-window': '550px',
+        'signup-window': '610px'
       }
     },
   },

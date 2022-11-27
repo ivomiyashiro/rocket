@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 
 import { IUser } from 'interfaces';
-import { checkDBCredentials, checkDBToken } from 'services';
+import { checkDBCredentials, checkDBToken, createDBNewUser } from 'services';
 
 import { AuthContext, authReducer } from './';
 
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
 
-  const signin = async({ email, password }: { email: string, password: string }) => {
+  const signin = async ({ email, password }: { email: string, password: string }) => {
     try {
       const data = await checkDBCredentials({ email, password });
       if (!data.ok) throw data.msg;
@@ -62,25 +62,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
 
-  // const signup = async( name: string, email: string, password: string ): Promise<{error: boolean; message?: string}> => {
-  //   try {
-  //     const { customer, message } = await signUp(name, email, password);
+  const signup = async ({ name, email, password }: { name: string; email: string; password: string }) => {
+    try {
+      const data = await createDBNewUser({ name, email, password });
+      if (!data.ok) throw data.msg;
 
-  //     if (!!message) return { error: true, message };
-
-  //     dispatch({
-  //       type: '[AUTH] - Signin',
-  //       payload: customer!
-  //     });
+      dispatch({
+        type: '[AUTH] - Signin',
+        payload: data.user!
+      });
       
-  //     const destination = router.query.p?.toString() || '/';
-  //     router.replace(destination);
-  //     return { error: false };
-  //   } catch(error) {
-  //     console.log(error);
-  //     return { error: true };
-  //   }
-  // };
+      const destination = router.query.p?.toString() || '/';
+      router.replace(destination);
+
+    } catch (error) {
+      throw error;
+    }
+  };
 
   // const signout = () => {
   //   signOut();
@@ -93,7 +91,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       // Methods
       signin,
-      // signup,
+      signup,
       // signout,
     } }>
       { children }
