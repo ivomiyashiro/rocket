@@ -92,15 +92,24 @@ export const renewToken = async (req: IAuthRequest, res: Response) => {
 
     const token = await genJWT({ uid, name, role });
     const user = await User.findById(uid);
+
+    if (!!!user) { 
+      res.clearCookie('token');
+      return res.status(400).json({
+        ok: false,
+        msg: 'User not found.'
+      });
+    }
+
     res.cookie('token', token);
 
     return res.json({ 
       ok: true,
       user: {
-        uid: user?.id,
-        email: user?.email,
-        name: user?.name,
-        role: user?.role
+        uid: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role
       }
     });
 
