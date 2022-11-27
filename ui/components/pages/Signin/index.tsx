@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { RocketIcon } from 'components/icons';
-import { CredentialsForm, ProviderForm } from './components';
+import { CredentialsForm, GoogleSignIn } from './components';
 
 export const SigninPage = () => {
   return (
@@ -17,7 +17,7 @@ export const SigninPage = () => {
           <div className='w-full h-px bg-gray-300'/>
           <span className='absolute bg-white p-3 text-gray-400 text-sm'>or</span>
         </div>
-        <ProviderForm />
+        <GoogleSignIn />
       </div>
     </div>
   );
