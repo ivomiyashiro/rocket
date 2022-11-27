@@ -1,8 +1,9 @@
-import { getGoogleOAuthURL } from 'helpers';
 import Image from 'next/image';
+import { getGoogleOAuthURL } from 'helpers';
 
+interface Props { type: 'Sign in' | 'Sign up' }
 
-export const GoogleSignIn = () => {
+export const GoogleProvider = ({ type }: Props) => {
   return (
     <a href={ getGoogleOAuthURL() } className='flex items-center gap-3 w-full justify-center py-2 border border-gray-200 rounded-md'>
       <Image
@@ -11,7 +12,7 @@ export const GoogleSignIn = () => {
         width={ 25 }
         height={ 25 }
       />
-      <p> Sign in with Google </p>
+      <p> { type } with Google </p>
     </a>
   );
 };
