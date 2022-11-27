@@ -20,21 +20,26 @@ const SigninPage = () => {
 export default SigninPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+
   const token = req.cookies.token || '';
-  const { user } = await checkDBToken({ token });
 
-  const { p = '/' } = query;
+  try {
+    if (!!!token) { return { props: { } }; }
 
-  if (user) {
-    return {
-      redirect: {
-        destination: p.toString(),
-        permanent: false
-      }
-    };
+    const { user } = await checkDBToken({ token });
+    const { p = '/' } = query;
+
+    if (!!user) {
+      return {
+        redirect: {
+          destination: p.toString(),
+          permanent: false
+        }
+      };
+    }
+  } catch (error) {
+    console.log(error);
   }
 
-  return {
-    props: { }
-  };
+  return { props: { } };
 };

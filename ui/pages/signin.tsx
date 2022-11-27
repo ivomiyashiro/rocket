@@ -21,13 +21,12 @@ export default SigninPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 
-  const token = req.headers.cookie || '';
+  const token = req.cookies.token || '';
 
   try {
     if (!!!token) { return { props: { } }; }
-    
-    const { user } = await checkDBToken({ token });
 
+    const { user } = await checkDBToken({ token });
     const { p = '/' } = query;
 
     if (!!user) {
