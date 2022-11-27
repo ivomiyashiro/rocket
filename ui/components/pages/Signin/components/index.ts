@@ -1,2 +1,1 @@
-export * from './CredentialsForm';
-export * from './GoogleSignIn';
+export * from './CredentialsSignInForm';

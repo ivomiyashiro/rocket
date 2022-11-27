@@ -1,7 +1,7 @@
 import { Button, Input } from 'components/ui';
-import { useCredential } from '../hooks';
+import { useSignInCredential } from '../hooks';
 
-export const CredentialsForm = () => {
+export const CredentialsSignInForm = () => {
 
   const { 
     emailInput, 
@@ -10,7 +10,7 @@ export const CredentialsForm = () => {
     setEmailInput, 
     setPasswordInput, 
     handleSubmit 
-  } = useCredential();
+  } = useSignInCredential();
 
   return (
     <form className='my-5' onSubmit={ handleSubmit }> 

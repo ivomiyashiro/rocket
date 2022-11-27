@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { RocketIcon } from 'components/icons';
-import { CredentialsForm, GoogleSignIn } from './components';
+import { CredentialsSignInForm } from './components';
+import { GoogleProvider } from 'components/ui';
 
 export const SigninPage = () => {
   return (
@@ -12,12 +13,12 @@ export const SigninPage = () => {
             <p className='text-3xl font-bold'>Sign in</p>
           </div>
         </Link>
-        <CredentialsForm />
+        <CredentialsSignInForm />
         <div className='relative w-full text-center flex items-center justify-center my-10'>
           <div className='w-full h-px bg-gray-300'/>
           <span className='absolute bg-white p-3 text-gray-400 text-sm'>or</span>
         </div>
-        <GoogleSignIn />
+        <GoogleProvider type='Sign in' />
       </div>
     </div>
   );

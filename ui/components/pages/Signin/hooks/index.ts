@@ -1,1 +1,1 @@
-export * from './useCredential';
+export * from './useSignInCredential';
