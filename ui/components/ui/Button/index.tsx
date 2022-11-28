@@ -20,21 +20,23 @@ export const Button = ({
   onClick 
 }: Props) => {
 
+  const className = `w-full h-full py-2 rounded-md flex items-center justify-center gap-1 ${ bgColor } ${ textColor }`;
+
   if (type === 'a') {
     return (
-      <a href={ href } >{ children }</a>
+      <a href={ href } className={ className } >{ children }</a>
     );
   }
 
   if (type === 'button') {
     return (
-      <button className={ `w-full py-2 rounded-md ${ bgColor } ${ textColor }` } onClick={ onClick }>{ children }</button>
+      <button className={ className } onClick={ onClick }>{ children }</button>
     );
   }
 
   if (type === 'link') {
     return (
-      <Link href={ href } >{ children }</Link>
+      <Link href={ href } className={ className } >{ children }</Link>
     );
   }
 
