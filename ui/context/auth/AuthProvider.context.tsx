@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       })
       .catch(error => {
         console.log(error);
-        Cookies.remove('token');
         dispatch({ type: '[AUTH] - Signout' });
       });
   }, []);
@@ -80,9 +79,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // const signout = () => {
-  //   signOut();
-  // };
+  const signout = () => {
+    Cookies.remove('token');
+    dispatch({ type: '[AUTH] - Signout' });
+  };
 
 
   return (
@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // Methods
       signin,
       signup,
-      // signout,
+      signout,
     } }>
       { children }
     </AuthContext.Provider>

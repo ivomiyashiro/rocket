@@ -7,7 +7,7 @@ interface ContextProps {
     user?: IUser;
     signin: ({ email, password }: { email: string; password: string }) => Promise<void>
     signup: ({ name, email, password }: { name: string; email: string; password: string }) => Promise<void>
-    // signout: () => void;
+    signout: () => void;
 }
 
 
