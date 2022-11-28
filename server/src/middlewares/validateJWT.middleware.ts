@@ -4,8 +4,8 @@ import { IAuthRequest } from 'interfaces';
 
 export const validateJWT = (req: IAuthRequest, res: Response, next: NextFunction) => {
 
-  const { token } = req.cookies;
-  console.log(req.headers);
+  const token = req.header('x-token');
+
   if (!token) {
     return res.status(401).json({
       ok: false,
