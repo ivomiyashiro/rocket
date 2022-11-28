@@ -7,7 +7,7 @@ const SigninPage = () => {
   return (
     <>
       <Head>  
-        <title>Sign In - Rocket</title>
+        <title>Sign In • Rocket</title>
         <meta name="description" content="Signin to Rocket." />
       </Head>
       <div className='w-full h-screen flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-500'>
