@@ -1,6 +1,11 @@
+import { AuthContext } from 'context';
 import Head from 'next/head';
+import { useContext } from 'react';
 
 export default function Home() {
+  
+  const { signout } = useContext(AuthContext);
+  
   return (
     <div>
       <Head>
@@ -9,7 +14,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        hola
+        <button className='bg-blue-600 p-4 text-white' onClick={ signout }>
+          Logout
+        </button>
       </main>
     </div>
   );
