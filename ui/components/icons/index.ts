@@ -6,4 +6,5 @@ export * from './Bell';
 export * from './Orders';
 export * from './Tag';
 export * from './User';
-
+export * from './Settings';
+export * from './CheckCircle';
