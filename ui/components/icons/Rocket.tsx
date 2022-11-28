@@ -3,11 +3,12 @@ import { IIcons } from './interface';
 export const RocketIcon = ({ size, color, ...props }: IIcons) => (
   <svg
     stroke="currentColor"
-    fill={ color }
+    fill="currentColor"
     strokeWidth={ 0 }
     viewBox="0 0 24 24"
     height={ size }
     width={ size }
+    color={ color }
     { ...props }
   >
     <path
