@@ -4,7 +4,6 @@ export const BellIcon = ({ size, color, ...props }: IIcons) => (
   <svg
     fill="currentColor"
     viewBox="0 0 20 20"
-    className="Polaris-Icon__Svg_375hu"
     aria-hidden="true"
     width={ size }
     height={ size }

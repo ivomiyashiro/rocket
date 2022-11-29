@@ -8,3 +8,6 @@ export * from './Tag';
 export * from './User';
 export * from './Settings';
 export * from './CheckCircle';
+export * from './ArrowLeft';
+export * from './Bars';
+export * from './Search';
