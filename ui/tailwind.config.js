@@ -4,17 +4,27 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'dashboard': '250px 1fr' 
+        'dashboard': '250px 1fr' ,
+        'dashboard-create-product': 'minmax(500px, 1fr) minmax(250px, 350px)'
       },
       width: {
-        'alerts-menu': '380px'
       },
       height: {
-        'dashboard-header': '65px'
+        'dashboard-header': '56px'
+      },
+      minWidth: {
+        'dashboard-header-logo': '240px',
+        'dashboard-header-menu': '145px',
+        'dashboard-alerts-menu': '380px'
+      },
+      minHeight: {
+        'dashboard-searcher-results': '160px'
       },
       maxWidth: {
         'signin-window': '400px',
-        'signup-window': '400px'
+        'signup-window': '400px',
+        'dashboard-main': '62.375rem',
+        'dashboard-searcher': '700px'
       },
       maxHeight: {
         'signin-window': '550px',
