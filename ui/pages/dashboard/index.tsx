@@ -5,7 +5,7 @@ import { DashboardLayout } from 'components/layouts';
 
 const DashboardPage = () => {
   return (
-    <DashboardLayout pageTitle='' sectionTitle='Dashboard'>
+    <DashboardLayout pageTitle=''>
       <Page />
     </DashboardLayout>
   );
