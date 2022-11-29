@@ -1,16 +1,16 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Modal } from 'components/ui';
 import { CheckCircleIcon } from 'components/icons';
+import { Menu } from 'components/ui';
 
 interface Props {
   isOpen: boolean,
   handleOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const NotificationMenu = ({ isOpen, handleOpen }: Props) => {
+export const AlertsMenu = ({ isOpen, handleOpen }: Props) => {
   return (
-    <Modal isOpen={ isOpen } handleOpen={ handleOpen }>
-      <menu className={ `absolute -right-40 w-alerts-menu mt-6 z-20 rounded-md shadow-popover bg-white overflow-hidden ${ isOpen ? 'h-auto outline outline-1 outline-divider' : 'h-0' }` }>
+    <Menu isOpen={ isOpen } handleOpen={ handleOpen }>
+      <menu className={ `fixed right-2 min-w-dashboard-alerts-menu mt-4 z-20 rounded-md shadow-popover bg-white overflow-hidden ${ isOpen ? 'h-auto outline outline-1 outline-divider' : 'h-0' }` }>
         <div className='p-4'>
           <div className='flex justify-between'>
             <h3 className='font-medium'>Alerts</h3>
@@ -23,6 +23,6 @@ export const NotificationMenu = ({ isOpen, handleOpen }: Props) => {
           </div>
         </div>
       </menu>
-    </Modal>
+    </Menu>
   );
 };

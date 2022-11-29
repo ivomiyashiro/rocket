@@ -5,31 +5,24 @@ import { MenuLink } from './components';
 
 export const DashboardMenu = () => {
   return ( 
-    <aside className='h-screen'>
-      <div className='pt-2 pl-2 pb-2 h-full'>
-        <div className='h-full flex flex-col gap-12 bg-white shadow-card rounded-md outline outline-1 outline-divider'>
-          <div className='h-dashboard-header px-4 flex items-center'>
-            <Link href='/dashboard'>
-              <div className='flex items-center gap-2 text-indigo-600'>
-                <RocketIcon size="40px" color="" />
-              </div>
-            </Link>
-          </div>
-          <ul className='flex flex-col gap-4 pr-3'>
+    <aside className='hidden md:block h-screen'>
+      <div className='h-full'>
+        <div className='h-full flex flex-col gap-12 shadow-card rounded-md outline outline-1 outline-divider'>
+          <ul className='flex flex-col gap-2 pr-3 mt-24'>
             <MenuLink href="/dashboard" icon={ <HomeIcon size="22px" color="" /> }>
-            Home
+              Home
             </MenuLink>
             <MenuLink href="/dashboard/orders" icon={ <OrdersIcon size="22px" color="" /> }>
-            Orders
+              Orders
             </MenuLink>
             <MenuLink href="/dashboard/products" icon={ <TagIcon size="22px" color="" /> }>
-            Products
+              Products
             </MenuLink>
             <MenuLink href="/dashboard/customers" icon={ <UserIcon size="22px" color="" /> }>
-            Customers
+              Customers
             </MenuLink>
             <MenuLink href="/dashboard/settings" icon={ <SettingsIcon size="22px" color="" /> }>
-            Settings
+              Settings
             </MenuLink>
           </ul>
           <div className='mt-auto p-3 h-16'>

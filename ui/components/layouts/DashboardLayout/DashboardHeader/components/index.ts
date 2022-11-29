@@ -1,2 +1,3 @@
 export * from './UserMenu';
-export * from './NotificationsMenu';
+export * from './AlertsMenu';
+export * from './Searchbar';
