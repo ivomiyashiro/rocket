@@ -11,3 +11,4 @@ export * from './CheckCircle';
 export * from './ArrowLeft';
 export * from './Bars';
 export * from './Search';
+export * from './Store';
