@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { AuthContext } from 'context';
 import { BarsIcon, BellIcon, RocketIcon, SearchIcon, UserRoundedIcon } from 'components/icons';
 import { UserMenu, Searchbar, AlertsMenu, AsideMenu } from './components';
+import { MainLogo } from 'components/ui';
 
 export const DashboardHeader = () => {
 
@@ -15,12 +16,7 @@ export const DashboardHeader = () => {
   return (
     <header className='h-dashboard-header flex items-center justify-between w-full px-4 fixed top-0 bg-white shadow-md'>
       <div className='hidden md:block min-w-dashboard-header-logo '>
-        <Link href='/dashboard'>
-          <div className='text-indigo-600 flex items-center gap-1'>
-            <RocketIcon size='35px' />
-            <p className='text-2xl italic font-extrabold text-gray-700'>Rocket</p>
-          </div>
-        </Link>
+        <MainLogo href='/dashboard' />
       </div>
       <div className='md:hidden'>
         <button className='h-10 px-2 rounded-md text-gray-600 hover:bg-gray-100' onClick={ () => setAsideMenuOpen(prev => !prev) }>
