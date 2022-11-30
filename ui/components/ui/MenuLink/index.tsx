@@ -15,12 +15,9 @@ export const MenuLink = ({ href, children, icon: Icon }: Props) => {
 
   useEffect(() => {
     const url = href.split('/').at(-1) || '';
-    const pathName = router.pathname.split('/').at(2) || 'dashboard'; // Check if exists array[2] if not its dashboard home page.
+    const pathName = router.pathname.split('/').at(2) || 'dashboard'; // Check if exists array[2], if not exists current page is dashboard home page.
 
-    if (pathName.includes(url)) {
-      return setActive(true);
-    }
-
+    if (pathName.includes(url)) return setActive(true);
     setActive(false);
   }, [router.pathname, href]);
 
