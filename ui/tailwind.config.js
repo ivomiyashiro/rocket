@@ -8,6 +8,7 @@ module.exports = {
         'dashboard-create-product': 'minmax(500px, 1fr) minmax(250px, 350px)'
       },
       width: {
+        'dashboard-mobile-aside-menu': '360px'
       },
       height: {
         'dashboard-header': '56px'
