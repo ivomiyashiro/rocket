@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
-import Link from 'next/link';
 import { AuthContext } from 'context';
-import { BarsIcon, BellIcon, RocketIcon, SearchIcon, UserRoundedIcon } from 'components/icons';
+import { BarsIcon, BellIcon, SearchIcon, UserRoundedIcon } from 'components/icons';
 import { UserMenu, Searchbar, AlertsMenu, AsideMenu } from './components';
 import { MainLogo } from 'components/ui';
 
