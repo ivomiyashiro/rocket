@@ -19,7 +19,7 @@ export const DashboardLayout = ({ children, pageTitle = '' }: Props) => {
       <div className='grid grid-cols-1 md:grid-cols-dashboard bg-gray-50'>
         <DashboardMenu />
         <div className=''>
-          <div className='max-w-dashboard-main mx-auto w-full px-2 py-4 min-h-screen'>
+          <div className='max-w-dashboard-main mx-auto w-full px-6 py-20 min-h-screen'>
             { children }
           </div>
         </div>
