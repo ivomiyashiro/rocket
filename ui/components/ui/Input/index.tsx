@@ -36,7 +36,7 @@ export const Input = ({
         name={ name }
         id={ id }
         onChange={ handleInputChange }
-        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md 
+        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md  text-sm
           ${ !!error &&  'border-red-500 bg-red-100 text-red-500 placeholder-red-400'} 
           ${ !!error ? 'focus:outline-red-500' : 'focus:outline-indigo-600' }
           ` 
