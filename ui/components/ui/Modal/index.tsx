@@ -11,9 +11,9 @@ interface Props {
 
 export const Modal = ({ children, isOpen, align, justify, withBackground = false, handleOpen }: Props) => {
   return (
-    <div className={ `fixed top-0 left-0 flex items-${ align } justify-${ justify } z-20 ${ isOpen ? 'w-full' : 'w-0'}` }>
-      { children }
-      <div className={ `h-full w-full fixed z-10 ${ isOpen ? 'block' : 'hidden'} ${ withBackground && 'bg-black bg-opacity-50'}` } onClick={ () => handleOpen(false) } />
+    <div className={ `fixed top-0 left-0 flex items-${ align } justify-${ justify } ${ isOpen ? 'w-full' : 'w-0'}` }>
+      <div className='relative z-30 top-0'>{ children }</div>
+      <div className={ `h-full w-full absolute z-20 ${ isOpen ? 'block' : 'hidden'} ${ withBackground && 'bg-black bg-opacity-50'}` } onClick={ () => handleOpen(false) } />
     </div>
   );
 };
