@@ -5,3 +5,5 @@ export * from './Menu';
 export * from './Modal';
 export * from './MenuLink';
 export * from './MainLogo';
+export * from './DashboardCard';
+export * from './TextArea';
