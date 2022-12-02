@@ -12,3 +12,5 @@ export * from './ArrowLeft';
 export * from './Bars';
 export * from './Search';
 export * from './Store';
+export * from './Grid';
+export * from './Image';

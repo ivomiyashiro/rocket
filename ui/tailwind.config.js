@@ -4,28 +4,44 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'dashboard': '250px 1fr' ,
-        'dashboard-create-product': 'minmax(500px, 1fr) minmax(250px, 350px)'
+        'dashboard': '250px 1fr',
+      },
+      gridColumn: {
+        'dashboard-add-product-first-img': '1/span 2'
+      },
+      gridRow: {
+        'dashboard-add-product-first-img': '1/span 2'
+      },
+      flex: {
+        'dashboard-add-product-col-1': '2 2 30rem',
+        'dashboard-add-product-col-2': '1 1 15rem'
       },
       width: {
-        'dashboard-mobile-aside-menu': '360px'
+        'dashboard-mobile-aside-menu': '360px',
+        'dashboard-add-product-image-base': '292px',
+        'dashboard-add-product-image-sm': '150px',
       },
       height: {
-        'dashboard-header': '56px'
+        'dashboard-header': '56px',
+        'dashboard-add-product-image-base': '292px',
+        'dashboard-add-product-image-sm': '138px',
       },
       minWidth: {
         'dashboard-header-logo': '240px',
         'dashboard-header-menu': '145px',
-        'dashboard-alerts-menu': '380px'
+        'dashboard-alerts-menu': '380px',
+        'dashboard-add-product-col-1': '51%'
       },
       minHeight: {
-        'dashboard-searcher-results': '160px'
+        'dashboard-searcher-results': '160px',
+        'dashboard-add-product-media': '118px'
       },
       maxWidth: {
         'signin-window': '400px',
         'signup-window': '400px',
         'dashboard-main': '62.375rem',
-        'dashboard-searcher': '700px'
+        'dashboard-searcher': '700px',
+        'dashboard-create-product-col-2': '350px'
       },
       maxHeight: {
         'signin-window': '550px',
