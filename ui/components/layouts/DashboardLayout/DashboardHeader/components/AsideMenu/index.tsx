@@ -10,7 +10,7 @@ interface Props {
 export const AsideMenu = ({ isOpen, handleOpen }: Props) => {
   return (
     <Modal align='start' justify='start' isOpen={ isOpen } withBackground handleOpen={ handleOpen } >
-      <aside className={ `h-screen bg-gray-50 relative top-0 z-20 ${ isOpen ? 'w-dashboard-mobile-aside-menu transition delay-1000' : 'w-0' } overflow-hidden transition delay-1000` }>
+      <aside className={ `h-screen bg-gray-50 ${ isOpen ? 'w-dashboard-mobile-aside-menu' : 'w-0' } overflow-hidden` }>
         <div className='h-full'>
           <div className='h-full flex flex-col gap-8 shadow-card outline outline-1 outline-divider'>
             <div className='h-dashboard-header flex items-center px-4 shadow-md bg-white'>
