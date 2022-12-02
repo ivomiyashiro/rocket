@@ -1,5 +1,5 @@
 import { Button, Input } from 'components/ui';
-import { useSignUpCredentials } from '../hooks';
+import { useSignUpCredentials } from '../useSignUpCredentials';
 
 export const CredentialsSignInForm = () => {
 
