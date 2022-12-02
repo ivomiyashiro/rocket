@@ -7,7 +7,7 @@ interface Props {
 
 export const DashboardCard = ({ title = '', children }: Props) => {
   return (
-    <div className='w-full p-5 shadow-card bg-white outline outline-1 outline-divider rounded-md'>
+    <section className='w-full p-5 shadow-card bg-white outline outline-1 outline-divider rounded-md'>
       {
         title
         &&
@@ -16,6 +16,6 @@ export const DashboardCard = ({ title = '', children }: Props) => {
         </div>
       }
       { children } 
-    </div>
+    </section>
   );
 };
