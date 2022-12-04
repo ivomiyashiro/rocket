@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement } from 'react';
 
 interface Props {
   inputValue: string;
@@ -7,8 +7,10 @@ interface Props {
   label?: string;
   name?: string;
   id?: string;
+  textField?: string | ReactElement;
   error: string;
-  handleInputValue: Dispatch<SetStateAction<{ value: string, error: string }>>;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = ({ 
@@ -18,30 +20,36 @@ export const Input = ({
   label = '',
   name = '',
   id = '',
-  error, 
-  handleInputValue 
+  textField,
+  error,
+  onBlur,
+  onChange 
 }: Props) => {
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleInputValue((prev) => ({ ...prev, value: e.target.value }));
+  const INPUT_TYPE = type === 'number' ? 'text' : type;
+
+  const handleInputNumberChange = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (type !== 'number') return;
+    if (!/[0-9]/.test(e.key)) e.preventDefault();
   };
 
   return (
     <div className='w-full'>
       <label className={ `text-sm mb-1 inline-block ${ !!error ? 'text-red-500' : 'text-gray-600'}` } htmlFor={ id }>{ label }</label>
-      <input 
-        type={ type }
-        placeholder={ placeholder }
-        value={ inputValue }
-        name={ name }
-        id={ id }
-        onChange={ handleInputChange }
-        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md  text-sm
-          ${ !!error &&  'border-red-500 bg-red-100 text-red-500 placeholder-red-400'} 
-          ${ !!error ? 'focus:outline-red-500' : 'focus:outline-indigo-600' }
-          ` 
-        }
-      />
+      <div className={ `flex items-center border border-gray-200 bg-gray-100 rounded-md outline outline-transparent ${ !!error &&  'border-red-500 bg-red-100 text-red-500 placeholder-red-400'} ${ !!error ? 'focus-within:outline-red-500' : 'focus-within:outline-indigo-600' }` }>
+        { !!textField && <div className='ml-2 text-gray-600'> { textField } </div> }
+        <input 
+          type={ INPUT_TYPE }
+          placeholder={ placeholder }
+          value={ inputValue }
+          name={ name }
+          id={ id }
+          onBlur={ onBlur }
+          onChange={ onChange }
+          onKeyPress={ handleInputNumberChange }
+          className='w-full py-2 px-3 rounded-md text-sm bg-transparent outline-none'
+        />
+      </div>
       <p className={ `opacity-0 ${ !!error && 'opacity-100' } text-xs text-red-500 mt-1` }>* { error }</p>
     </div>
   );
