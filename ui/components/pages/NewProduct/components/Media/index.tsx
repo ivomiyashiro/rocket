@@ -37,7 +37,7 @@ export const Media = ({ productMedia, handleProductMedia }: Props) => {
               <button className='text-sm text-red-500 cursor-pointer hover:underline' onClick={ handleDeleteImage }> Delete files </button>
             </div>
           )
-          : <h3 className='font-medium mb-3'>Media</h3>
+          : <h3 className='font-medium mb-5'>Media</h3>
       }
       {
         !!fileError 
