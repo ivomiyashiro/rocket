@@ -14,3 +14,4 @@ export * from './Search';
 export * from './Store';
 export * from './Grid';
 export * from './Image';
+export * from './Money';
