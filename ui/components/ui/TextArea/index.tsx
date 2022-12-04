@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent } from 'react';
 
 interface Props {
   textAreaValue: string;
@@ -7,7 +7,7 @@ interface Props {
   name?: string;
   id?: string;
   error: string;
-  handleTextAreaValue: Dispatch<SetStateAction<{ value: string, error: string }>>;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export const TextArea = ({ 
@@ -17,13 +17,8 @@ export const TextArea = ({
   name = '',
   id = '',
   error, 
-  handleTextAreaValue 
+  onChange
 }: Props) => {
-
-  const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    handleTextAreaValue((prev) => ({ ...prev, value: e.target.value }));
-  };
-
   return (
     <div className='w-full'>
       <label className={ `text-sm mb-1 inline-block ${ !!error ? 'text-red-500' : 'text-gray-600'}` } htmlFor={ id }>{ label }</label>
@@ -32,8 +27,8 @@ export const TextArea = ({
         value={ textAreaValue }
         name={ name }
         id={ id }
-        onChange={ handleTextAreaChange }
-        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md resize-none h-32
+        onChange={ onChange }
+        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md resize-none h-32 outline outline-transparent
           ${ !!error &&  'border-red-500 bg-red-100 text-red-500 placeholder-red-400'} 
           ${ !!error ? 'focus:outline-red-500' : 'focus:outline-indigo-600' }
           ` 
