@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { Input, DashboardCard, TextArea } from 'components/ui';
 
 interface Props {
@@ -15,6 +15,14 @@ export const TitleAndDescription = ({
   handleDescriptionValue 
 }: Props) => {
 
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleTitleValue((prev) => ({ ...prev, value: e.target.value }));
+  };
+
+  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    handleDescriptionValue((prev) => ({ ...prev, value: e.target.value }));
+  };
+
   return (
     <DashboardCard>
       <Input
@@ -23,14 +31,14 @@ export const TitleAndDescription = ({
         placeholder='Short sleev t-shirt'
         inputValue={ titleValue.value }
         error={ titleValue.error }
-        handleInputValue={ handleTitleValue }
+        onChange={ handleTitleChange }
       />
       <TextArea
         label='Description'
         placeholder=''
         textAreaValue={ descriptionValue.value }
         error={ descriptionValue.error }
-        handleTextAreaValue={ handleDescriptionValue }
+        onChange={ handleDescriptionChange }
       />
     </DashboardCard>
   );
