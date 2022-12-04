@@ -12,7 +12,7 @@ export const DashboardCard = ({ title = '', children }: Props) => {
         title
         &&
         <div>
-          <h3 className='font-medium mb-3'>{ title }</h3>
+          <h3 className='font-medium mb-5'>{ title }</h3>
         </div>
       }
       { children } 
