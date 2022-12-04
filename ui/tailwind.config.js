@@ -18,6 +18,7 @@ module.exports = {
       },
       width: {
         'dashboard-mobile-aside-menu': '360px',
+        'dashboard-aside-menu': '250px',
         'dashboard-add-product-image-base': '292px',
         'dashboard-add-product-image-sm': '150px',
       },

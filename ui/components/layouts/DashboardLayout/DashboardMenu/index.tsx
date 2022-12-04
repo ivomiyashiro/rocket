@@ -4,7 +4,7 @@ import { MenuLink, Button } from 'components/ui';
 export const DashboardMenu = () => {
   return ( 
     <aside className='hidden md:block h-screen'>
-      <div className='h-full'>
+      <div className='h-full fixed left-0 w-dashboard-aside-menu'>
         <div className='h-full flex flex-col gap-8 shadow-card rounded-md outline outline-1 outline-divider'>
           <ul className='flex flex-col gap-2 pr-3 mt-20'>
             <MenuLink href="/dashboard" icon={ <HomeIcon size="22px" /> }>
