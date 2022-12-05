@@ -1,21 +1,16 @@
-import { Dispatch, DragEvent, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 
-import { ImageIcon } from 'components/icons';
 import ImageCard from './ImageCard';
 
 interface Props {
-  dragState: boolean;
   mediaList: { id?: string; file?: File, fileUrl?: string; isChecked?: boolean }[];
-  isImageUploding: boolean;
   handleClick: () => void;
   handleMediaMediaImage: Dispatch<SetStateAction<{id?: string; file?: File, fileUrl?: string; isChecked?: boolean}[]>>;
 }
 
 const WithMedia = ({ 
   mediaList,
-  dragState,
-  isImageUploding,
   handleClick,
   handleMediaMediaImage,
 }: Props) => {
@@ -30,7 +25,6 @@ const WithMedia = ({
                 index={ i }
                 image={ image }
                 handleMediaMediaImage={ handleMediaMediaImage }
-                isSmall
               />
             );
           })

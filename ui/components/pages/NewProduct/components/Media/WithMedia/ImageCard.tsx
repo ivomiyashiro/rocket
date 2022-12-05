@@ -6,11 +6,10 @@ import { GridIcon } from 'components/icons';
 
 interface Props {
   image: { id?: string; file?: File, fileUrl?: string; isChecked?: boolean };
-  isSmall?: boolean;
   handleMediaMediaImage: Dispatch<SetStateAction<{id?: string; file?: File, fileUrl?: string; isChecked?: boolean}[]>>;
 }
 
-const ImageCard = ({ image, isSmall = false, handleMediaMediaImage }: Props) => {
+const ImageCard = ({ image, handleMediaMediaImage }: Props) => {
   
   const { id, file, fileUrl, isChecked } = image;
   const [isHover, setHover] = useState(false);
