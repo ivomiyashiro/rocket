@@ -15,3 +15,5 @@ export * from './Store';
 export * from './Grid';
 export * from './Image';
 export * from './Money';
+export * from './Plus';
+export * from './Delete';
