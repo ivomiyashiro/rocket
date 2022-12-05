@@ -70,7 +70,7 @@ export const useMedia = ({ inputRef, productMedia, handleProductMedia }: Props) 
     for (let i = 0; i < e.dataTransfer.files.length; i++) {
       const file = e.dataTransfer.files[i];
       const fileTypeError = (file.type !== 'image/jpeg' && file.type !== 'image/png');
-      console.log(e.dataTransfer.files && e.dataTransfer.files[i]);
+      
       if (productMediaLen > MAX_AMOUNT_IMG || e.dataTransfer.files.length > MAX_AMOUNT_IMG) {
         setDrag(false);
         return setFileError('* You can only upload 5 images.');
