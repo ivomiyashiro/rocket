@@ -1,16 +1,18 @@
 import { useNewProduct } from '../../useNewProduct';
-import { TitleAndDescription, Media } from '../';
+import { TitleAndDescription, Media, Pricing } from '../';
+import { Options } from '../Options';
 
 
 export const AddProductForm = () => {
 
   const { 
-    titleValue,
-    descriptionValue,
-    mediaValue,
-    setTitleValue,
-    setDescriptionValue,
-    setMediaValue,
+    titleValue, descriptionValue,
+    mediaValue, priceValue,
+    discountPriceValue, withOptions,
+    options, setTitleValue,
+    setDescriptionValue, setMediaValue,
+    setPriceValue, setDiscountPriceValue,
+    setWithOptions, setOptions,
     handleSubmit
   } = useNewProduct();
 
@@ -25,6 +27,25 @@ export const AddProductForm = () => {
             handleDescriptionValue={ setDescriptionValue }
           />
           <Media productMedia={ mediaValue } handleProductMedia={ setMediaValue } />
+          <Options 
+            withOptions={ withOptions } 
+            options={ options }
+            handleWithOptions={ setWithOptions } 
+            handleOptions={ setOptions }
+          />
+          {
+            !withOptions
+            &&
+            <>
+              <Pricing
+                priceValue={ priceValue }
+                discountPriceValue={ discountPriceValue }
+                handlePriceValue={ setPriceValue }
+                handleDiscountPriceValue={ setDiscountPriceValue }
+              />
+            </>
+          }
+
         </div>
         <div className='flex-dashboard-add-product-col-2 min-w-0'>
 
