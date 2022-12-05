@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, KeyboardEvent, ReactElement } from 'react';
+import { ChangeEvent, FocusEvent, KeyboardEvent, KeyboardEventHandler, ReactElement } from 'react';
 
 interface Props {
   inputValue: string;
@@ -23,7 +23,7 @@ export const Input = ({
   textField,
   error,
   onBlur,
-  onChange 
+  onChange,
 }: Props) => {
 
   const INPUT_TYPE = type === 'number' ? 'text' : type;
@@ -35,8 +35,8 @@ export const Input = ({
 
   return (
     <div className='w-full'>
-      <label className={ `text-sm mb-1 inline-block ${ !!error ? 'text-red-500' : 'text-gray-600'}` } htmlFor={ id }>{ label }</label>
-      <div className={ `flex items-center border border-gray-200 bg-gray-100 rounded-md outline outline-transparent ${ !!error &&  'border-red-500 bg-red-100 text-red-500 placeholder-red-400'} ${ !!error ? 'focus-within:outline-red-500' : 'focus-within:outline-indigo-600' }` }>
+      { !!label && <label className={ `text-sm mb-1 inline-block ${ !!error ? 'text-red-500' : 'text-gray-600'}` } htmlFor={ id }>{ label }</label> } 
+      <div className={ `flex items-center border border-gray-200 bg-gray-100 rounded-md outline outline-transparent ${ !!error ?  'border-red-500 bg-red-100 text-red-500 placeholder-red-400' : 'focus-within:outline-indigo-600'}` }>
         { !!textField && <div className='ml-2 text-gray-600'> { textField } </div> }
         <input 
           type={ INPUT_TYPE }
