@@ -2,12 +2,13 @@ import { ReactNode } from 'react';
 
 interface Props {
   title?: string;
-  children: ReactNode
+  className?: string;
+  children: ReactNode;
 }
 
-export const DashboardCard = ({ title = '', children }: Props) => {
+export const DashboardCard = ({ title = '', className, children }: Props) => {
   return (
-    <section className='w-full p-5 shadow-card bg-white outline outline-1 outline-divider rounded-md'>
+    <section className={ `w-full shadow-card bg-white outline outline-1 outline-divider rounded-md ${ className }` }>
       {
         title
         &&

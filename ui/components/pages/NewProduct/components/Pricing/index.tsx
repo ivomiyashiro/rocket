@@ -43,7 +43,7 @@ export const Pricing = ({
   };
 
   return (
-    <DashboardCard title='Pricing'>
+    <DashboardCard title='Pricing' className='p-5 pb-0'>
       <Input
         type='number' 
         label='Price'

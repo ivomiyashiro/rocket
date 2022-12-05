@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { useMedia } from './useMedia';
-import { Button, DashboardCard } from 'components/ui';
+import { DashboardCard } from 'components/ui';
 import WithMedia from './WithMedia';
 import { WithoutMedia } from './WithoutMedia';
 import { ImageIcon } from 'components/icons';
@@ -27,8 +27,9 @@ export const Media = ({ productMedia, handleProductMedia }: Props) => {
     handleDeleteImage,
     onSortEnd 
   } = useMedia({ inputRef, productMedia, handleProductMedia });
+  
   return (
-    <DashboardCard>
+    <DashboardCard className='p-5'>
       {
         imagesCheckedCount > 0
           ? (
@@ -80,9 +81,7 @@ export const Media = ({ productMedia, handleProductMedia }: Props) => {
               <WithMedia
                 axis='xy'
                 onSortEnd={ onSortEnd }
-                dragState={ drag }
                 mediaList={ productMedia }
-                isImageUploding={ isImageUploading }
                 handleClick={ handleClick }
                 handleMediaMediaImage={ handleProductMedia }
               />

@@ -24,7 +24,7 @@ export const TitleAndDescription = ({
   };
 
   return (
-    <DashboardCard>
+    <DashboardCard className='p-5 pb-0'>
       <Input
         type='text' 
         label='Title'
