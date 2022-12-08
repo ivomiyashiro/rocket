@@ -4,8 +4,8 @@ import { uploadImage } from 'services';
 
 interface Props {
   inputRef: RefObject<HTMLInputElement>;
-  productMedia: { id?: string; file?: File, fileUrl?: string; isChecked?: boolean }[]
-  handleProductMedia: Dispatch<SetStateAction<{id?: string; file?: File, fileUrl?: string; isChecked?: boolean}[]>>
+  productMedia: { id: string; url: string; isChecked: boolean }[]
+  handleProductMedia: Dispatch<SetStateAction<{ id: string; url: string; isChecked: boolean }[]>>
 }
 
 export const useMedia = ({ inputRef, productMedia, handleProductMedia }: Props) => {
@@ -47,9 +47,8 @@ export const useMedia = ({ inputRef, productMedia, handleProductMedia }: Props) 
             handleProductMedia(prev => [
               ...prev,
               {
-                id: new Date().valueOf().toString(),
-                file,
-                fileUrl: resp,
+                id: Math.random().toString(),
+                url: resp,
                 isChecked: false,
               }
             ]);
@@ -84,9 +83,8 @@ export const useMedia = ({ inputRef, productMedia, handleProductMedia }: Props) 
             handleProductMedia(prev => [
               ...prev,
               {
-                id: new Date().valueOf().toString(),
-                file,
-                fileUrl: resp,
+                id: Math.random().toString(),
+                url: resp,
                 isChecked: false,
               }
             ]);

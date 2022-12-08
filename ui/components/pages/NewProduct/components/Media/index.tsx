@@ -1,13 +1,15 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
+
 import { useMedia } from './useMedia';
-import { DashboardCard } from 'components/ui';
-import WithMedia from './WithMedia';
-import { WithoutMedia } from './WithoutMedia';
+
 import { ImageIcon } from 'components/icons';
+import { DashboardCard } from 'components/ui';
+import { WithoutMedia } from './WithoutMedia';
+import WithMedia from './WithMedia';
 
 interface Props {
-  productMedia: {id?: string; file?: File, fileUrl?: string; isChecked?: boolean}[]
-  handleProductMedia: Dispatch<SetStateAction<{id?: string; file?: File, fileUrl?: string; isChecked?: boolean}[]>>
+  productMedia: { id: string; url: string; isChecked: boolean }[]
+  handleProductMedia: Dispatch<SetStateAction<{ id: string; url: string; isChecked: boolean }[]>>
 }
 
 export const Media = ({ productMedia, handleProductMedia }: Props) => {
@@ -83,7 +85,7 @@ export const Media = ({ productMedia, handleProductMedia }: Props) => {
                 onSortEnd={ onSortEnd }
                 mediaList={ productMedia }
                 handleClick={ handleClick }
-                handleMediaMediaImage={ handleProductMedia }
+                handleProductMedia={ handleProductMedia }
               />
             )
             : (

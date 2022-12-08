@@ -1,7 +1,6 @@
 import { useNewProduct } from '../../useNewProduct';
-import { TitleAndDescription, Media, Pricing } from '../';
-import { Options } from '../Options';
-
+import { TitleAndDescription, Media, Pricing, Options } from '../';
+import { Variants } from '../Variants';
 
 export const AddProductForm = () => {
 
@@ -27,11 +26,14 @@ export const AddProductForm = () => {
             handleDescriptionValue={ setDescriptionValue }
           />
           <Media productMedia={ mediaValue } handleProductMedia={ setMediaValue } />
-          <Options 
+          <Options
             withOptions={ withOptions } 
             options={ options }
             handleWithOptions={ setWithOptions } 
             handleOptions={ setOptions }
+          />
+          <Variants 
+            options={ options }
           />
           {
             !withOptions
@@ -45,7 +47,6 @@ export const AddProductForm = () => {
               />
             </>
           }
-
         </div>
         <div className='flex-dashboard-add-product-col-2 min-w-0'>
 
