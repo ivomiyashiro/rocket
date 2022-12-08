@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, FocusEvent, SetStateAction } from 'react';
-import { Input, DashboardCard } from 'components/ui';
 import { MoneyIcon } from 'components/icons';
+import { Input, DashboardCard } from 'components/ui';
 
 interface Props {
   priceValue: { value: string, error: string };
