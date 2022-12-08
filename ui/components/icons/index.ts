@@ -17,3 +17,5 @@ export * from './Image';
 export * from './Money';
 export * from './Plus';
 export * from './Delete';
+export * from './TriangleUp';
+export * from './TriangleDown';
