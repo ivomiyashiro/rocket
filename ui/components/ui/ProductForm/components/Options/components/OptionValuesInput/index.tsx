@@ -1,9 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 
+import { IOption } from 'interfaces';
+
+import { useValuesInput } from './useValuesInput';
+
 import { Input } from 'components/ui';
 import { DeleteIcon, GridIcon } from 'components/icons';
-import { useValuesInput } from './useValuesInput';
 
 interface Props {
   index: number;
@@ -13,7 +16,7 @@ interface Props {
   withDeleteBtn: boolean;
   error: boolean;
   handleErrors: Dispatch<SetStateAction<number[]>>;
-  handleValue: Dispatch<SetStateAction<{ id: number; name: string; values: {id: number; value: string}[]; editing: boolean; }[]>>
+  handleValue: Dispatch<SetStateAction<IOption[]>>
 }
 
 const OptionValuesInput = ({ index, optValue, optID, isLast, error, withDeleteBtn, handleValue, handleErrors }: Props) => {

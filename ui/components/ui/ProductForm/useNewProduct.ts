@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react';
-import { IOption } from 'interfaces';
+import { IImage, IOption } from 'interfaces';
 
 export const useNewProduct = () => {
 
   const [titleValue, setTitleValue] = useState({ value: '', error: '' });
   const [descriptionValue, setDescriptionValue] = useState({ value: '', error: '' });
-  const [mediaValue, setMediaValue] = useState<{ id: string, url: string, isChecked: boolean }[]>([]);
+  const [mediaValue, setMediaValue] = useState<IImage[]>([]);
   const [priceValue, setPriceValue] = useState({ value: '', error: '' });
   const [discountPriceValue, setDiscountPriceValue] = useState({ value: '', error: '' });
   const [withOptions, setWithOptions] = useState(false);

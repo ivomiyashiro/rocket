@@ -1,15 +1,16 @@
-import { NewProductPage as Page } from 'components/pages';
-import { DashboardLayout } from 'components/layouts';
 import { getServerSideProps } from 'pages/dashboard';
+import { AddNewProductPage as Page } from 'components/pages';
+import { DashboardLayout } from 'components/layouts';
+import { ProductFormProvider } from 'context';
 
-const NewProductPage = () => {
+const ProductsPage = () => {
   return (
-    <DashboardLayout pageTitle='• Products • New' sectionTitle='Products'>
-      <Page />
+    <DashboardLayout pageTitle='• Products'>
+
     </DashboardLayout>
   );
 };
 
-export default NewProductPage;
+export default ProductsPage;
 
 export { getServerSideProps };

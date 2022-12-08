@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next';
+
 import { checkDBToken } from 'services';
+
 import { DashboardPage as Page } from 'components/pages';
 import { DashboardLayout } from 'components/layouts';
 

@@ -1,13 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { IOption } from 'interfaces';
 import { useOptionsForm } from './useOptionsForm';
 
 import { PlusIcon } from 'components/icons';
 import OptionsList from '../OptionsList';
 
 interface Props {
-  options: { id: number; name: string; values: {id: number; value: string}[]; editing: boolean; }[];
-  handleOptions:Dispatch<SetStateAction<{ id: number; name: string; values: {id: number; value: string}[]; editing: boolean; }[]>>
+  options: IOption[];
+  handleOptions:Dispatch<SetStateAction<IOption[]>>
   handleWithOptions: Dispatch<SetStateAction<boolean>>;
 }
 

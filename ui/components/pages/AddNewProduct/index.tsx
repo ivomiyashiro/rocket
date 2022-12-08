@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { ArrowLeftIcon } from 'components/icons';
-import { AddProductForm } from './components';
+import { ProductForm } from 'components/ui';
 
-export const NewProductPage = () => {
+export const AddNewProductPage = () => {
 
   const router = useRouter();
 
@@ -14,7 +14,7 @@ export const NewProductPage = () => {
         </button>
         <h2 className='text-gray-700 font-semibold text-xl'>Add Product</h2>
       </div>
-      <AddProductForm />
+      <ProductForm />
     </div>
   );
 };

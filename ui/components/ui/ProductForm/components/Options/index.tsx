@@ -1,15 +1,21 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { IOption } from 'interfaces';
 import { DashboardCard } from 'components/ui';
 import { OptionsForm } from './components';
 
 interface Props {
   withOptions: boolean;
-  options: { id: number; name: string; values: {id: number; value: string}[]; editing: boolean; }[];
+  options: IOption[];
   handleWithOptions: Dispatch<SetStateAction<boolean>>;
-  handleOptions:Dispatch<SetStateAction<{ id: number; name: string; values: {id: number; value: string}[]; editing: boolean; }[]>>
+  handleOptions: Dispatch<SetStateAction<IOption[]>>
 }
 
 export const Options = ({ withOptions, options, handleOptions, handleWithOptions }: Props) => {
+
+  useEffect(() => {
+    handleOptions([{ id: new Date().valueOf(), name: '', values: [{ id: new Date().valueOf(), value: '' }], editing: true }]);
+  }, [withOptions, handleOptions]);
+
   return (
     <DashboardCard title='Options' className={ `p-5 ${withOptions && 'pb-0'}` }>
       <div className={ `flex items-center gap-2 ${withOptions && 'pb-5 border-b'}` }>
@@ -20,7 +26,9 @@ export const Options = ({ withOptions, options, handleOptions, handleWithOptions
           checked={ withOptions }
           onChange={ () =>  handleWithOptions(prev => !prev) }
         />
-        <label htmlFor="with-options" className='text-sm text-gray-600 cursor-pointer'>This product has options, like size or color.</label>
+        <label htmlFor="with-options" className='text-sm text-gray-600 cursor-pointer'> 
+          This product has options, like size or color. 
+        </label>
       </div>
       { withOptions && <OptionsForm options={ options } handleOptions={ handleOptions } handleWithOptions={ handleWithOptions } /> }
     </DashboardCard>

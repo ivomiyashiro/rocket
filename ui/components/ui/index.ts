@@ -8,4 +8,5 @@ export * from './MainLogo';
 export * from './DashboardCard';
 export * from './TextArea';
 export * from './Popup';
+export * from './ProductForm';
 export { default as ImageCard } from './ImageCard';

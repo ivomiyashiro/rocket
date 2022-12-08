@@ -1,25 +1,16 @@
-import { useNewProduct } from '../../useNewProduct';
-import { TitleAndDescription, Media, Pricing, Options } from '../';
-import { Variants } from '../Variants';
+import { useContext } from 'react';
+import { ProductFormContext } from 'context';
+import { TitleAndDescription, Media, Pricing, Options, Variants } from './components';
 
-export const AddProductForm = () => {
+export const ProductForm = () => {
 
-  const { 
-    titleValue, descriptionValue,
-    mediaValue, priceValue,
-    discountPriceValue, withOptions,
-    options, setTitleValue,
-    setDescriptionValue, setMediaValue,
-    setPriceValue, setDiscountPriceValue,
-    setWithOptions, setOptions,
-    handleSubmit
-  } = useNewProduct();
+  const { handleSubmit } = useContext(ProductFormContext);    
 
   return (
     <form onSubmit={ handleSubmit }>
       <div className='flex flex-wrap items-start mt-5 gap-6'>
         <div className='flex-dashboard-add-product-col-1 min-w-dashboard-add-product-col-1 flex flex-col gap-5'>
-          <TitleAndDescription 
+          {/* <TitleAndDescription 
             titleValue={ titleValue }
             descriptionValue={ descriptionValue }
             handleTitleValue={ setTitleValue }
@@ -46,7 +37,7 @@ export const AddProductForm = () => {
                 handleDiscountPriceValue={ setDiscountPriceValue }
               />
             </>
-          }
+          } */}
         </div>
         <div className='flex-dashboard-add-product-col-2 min-w-0'>
 

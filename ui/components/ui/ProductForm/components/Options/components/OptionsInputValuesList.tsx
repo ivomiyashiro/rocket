@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
-import { OptionsValuesInput } from './';
+import { IOption } from 'interfaces';
+import { OptionsValuesInput } from '.';
 
 interface Props {
-  option: { id: number; name: string; values: {id: number; value: string}[]; editing: boolean; };
+  option: IOption;
   optionValuesErrors: number[];
-  handleOptions:Dispatch<SetStateAction<{ id: number; name: string; values: {id: number; value: string}[]; editing: boolean; }[]>>
+  handleOptions:Dispatch<SetStateAction<IOption[]>>
   handleOptionsErrors: Dispatch<SetStateAction<number[]>>;
 }
 
