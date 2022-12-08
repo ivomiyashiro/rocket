@@ -18,7 +18,7 @@ export const DashboardLayout = ({ children, pageTitle = '' }: Props) => {
       <DashboardHeader />
       <div className='grid grid-cols-1 md:grid-cols-dashboard bg-gray-50'>
         <DashboardMenu />
-        <div className=''>
+        <div className='overflow-hidden'>
           <div className='max-w-dashboard-main mx-auto w-full px-6 py-20 min-h-screen'>
             { children }
           </div>
