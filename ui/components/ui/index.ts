@@ -7,3 +7,5 @@ export * from './MenuLink';
 export * from './MainLogo';
 export * from './DashboardCard';
 export * from './TextArea';
+export * from './Popup';
+export { default as ImageCard } from './ImageCard';
