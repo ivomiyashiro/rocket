@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { IProductFormOption, ProductFormContext } from 'context';
 
 import { DeleteIcon, GridIcon } from 'components/icons';
-import { Input, SortableItem } from 'components/ui';
+import { Input } from 'components/ui';
 
 interface Props {
   option: IProductFormOption;
@@ -27,28 +27,27 @@ export const OptionValuesInput = ({
   } = useContext(ProductFormContext);
 
   return (
-    <SortableItem id={ optValue.id } disabled={ isLast }>
-      <li className='flex items-center relative z-10'>
-        {
-          btnVisibles
+    <li className='flex items-center relative z-10'>
+      {
+        btnVisibles
         &&
         <button type='button' className='text-gray-300 -mt-5 absolute hover:cursor-grab active:cursor-grabbing'>
           <GridIcon size="22px" />
         </button>
-        }
-        <div className='w-full ml-9 mr-9'>
-          <Input
-            inputValue={ optValue?.name }
-            placeholder='Medium'
-            type='text'
-            error={ optValue?.error ? 'Option value is required.' : '' }
-            onFocus={ () => { isLast && handleAddNewOptionValue({ optID: option.id }); } }
-            onBlur={ (e) => handleOptionValueErrors({ optID: option.id ,optValueID: optValue.id, e }) }
-            onChange={ (e) => handleOptionValues({ optID: option.id, optValueID: optValue.id, e }) }
-          />
-        </div>
-        {
-          btnVisibles
+      }
+      <div className='w-full ml-9 mr-9'>
+        <Input
+          inputValue={ optValue?.name }
+          placeholder='Medium'
+          type='text'
+          error={ optValue?.error ? 'Option value is required.' : '' }
+          onFocus={ () => { isLast && handleAddNewOptionValue({ optID: option.id }); } }
+          onBlur={ (e) => handleOptionValueErrors({ optID: option.id ,optValueID: optValue.id, e }) }
+          onChange={ (e) => handleOptionValues({ optID: option.id, optValueID: optValue.id, e }) }
+        />
+      </div>
+      {
+        btnVisibles
           &&
           <button 
             type='button' 
@@ -57,8 +56,7 @@ export const OptionValuesInput = ({
           >
             <DeleteIcon size='20px' />
           </button>
-        }
-      </li>
-    </SortableItem>
+      }
+    </li>
   );
 };

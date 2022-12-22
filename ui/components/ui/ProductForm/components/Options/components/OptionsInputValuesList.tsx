@@ -1,6 +1,6 @@
-import { SortableContainer } from 'components/ui/Sortable';
-import { IProductFormOption, ProductFormContext } from 'context';
 import { useContext } from 'react';
+import { IProductFormOption, ProductFormContext } from 'context';
+import { SortableContainer, SortableItem } from 'components/ui';
 import { OptionValuesInput } from './';
 
 interface Props { option: IProductFormOption;  }
@@ -25,13 +25,14 @@ export const OptionsInputValuesList = ({ option }: Props) => {
                 const withDeleteBtn = option.values.length > 2;
 
                 return (
-                  <OptionValuesInput
-                    key={ i }
-                    option={ option }
-                    optValue={ optVal }
-                    btnVisibles={ withDeleteBtn && !isLast }
-                    isLast={ isLast }
-                  />
+                  <SortableItem key={ i } id={ optVal.id } disabled={ isLast }>
+                    <OptionValuesInput
+                      option={ option }
+                      optValue={ optVal }
+                      btnVisibles={ withDeleteBtn && !isLast }
+                      isLast={ isLast }
+                    />
+                  </SortableItem>
                 );
               })
             }

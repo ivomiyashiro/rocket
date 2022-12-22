@@ -112,13 +112,20 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const handleOptionCardSortEnd = ({ oldIndex, newIndex }: { oldIndex: number, newIndex: number }) => {
-    dispatch({
-      type: '[PRODUCT FORM] - Handle options',
-      payload: {
-        options: arrayMoveImmutable(state.options, oldIndex, newIndex)
-      }
-    });
+  const handleOptionCardSortEnd = ({ e }: { e: DragEndEvent }) => {
+    const { active, over } = e;
+    
+    const oldIndex = active.data?.current?.sortable?.index;
+    const newIndex = over?.data?.current?.sortable?.index;
+
+    if (active.id !== over?.id) {
+      dispatch({
+        type: '[PRODUCT FORM] - Handle options',
+        payload: {
+          options: arrayMove(state.options, oldIndex, newIndex)
+        }
+      });
+    }
   };
 
   const handleToggleOptions = () => {
@@ -352,8 +359,6 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
         }
       });
     }
-
-
   };
 
   // <------- OPTIONS
@@ -542,21 +547,37 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const handleImageSortEnd = ({ variantID, oldIndex, newIndex }: { variantID: string, oldIndex: number, newIndex: number }) => { 
-    dispatch({
-      type: '[PRODUCT FORM] - Handle variants',
-      payload: {
-        variants: state.variants.map(variant => {
-          if (variant.id !== variantID) return variant; 
-          const newImageOrder = arrayMoveImmutable(variant.images, oldIndex, newIndex);
-  
-          return { 
-            ...variant, 
-            images: newImageOrder
-          };
-        })
-      }
-    });
+  const handleImageSortEnd = ({ variantID, e }: { variantID: string, e: DragEndEvent }) => { 
+    const { active, over } = e;
+
+    if (active.id !== over?.id) {
+      dispatch({
+        type: '[PRODUCT FORM] - Handle variants',
+        payload: {
+          variants: state.variants.map(variant => {
+            if (variant.id !== variantID) return variant; 
+            const oldIndex = active.data?.current?.sortable?.index;
+            const newIndex = over?.data?.current?.sortable?.index;
+    
+            return { 
+              ...variant,
+              images: arrayMove(variant.images, oldIndex, newIndex)
+            };
+          })
+          // options: state.options.map(opt => {
+          //   if (opt.id !== optID) return opt; 
+          //   const oldIndex = active.data?.current?.sortable?.index;
+          //   const newIndex = over?.data?.current?.sortable?.index;
+
+            
+          //   return { 
+          //     ...opt, 
+          //     values: arrayMove(opt.values, oldIndex, newIndex)
+          //   };
+          // })
+        }
+      });
+    }
   };
 
   const handleToggleImageCheckState = ({ variantID, imageID }: { variantID: string; imageID: string }) => {

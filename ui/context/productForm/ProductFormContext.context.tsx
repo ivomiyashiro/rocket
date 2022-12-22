@@ -20,7 +20,7 @@ interface ContextProps extends IProductForm {
 
   handleOptionsForm: ({ options }: { options: IProductFormOption[] }) => void;
   handleDeleteOptions: ({ optID }: { optID: string }) => void;
-  handleOptionCardSortEnd: ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => void;
+  handleOptionCardSortEnd: ({ e }: { e: DragEndEvent }) => void;
   handleToggleOptions: () => void;
   handleAddNewOption: () => void;
   handleToggleEditStatus: ({ optID }: { optID: string }) => void;
