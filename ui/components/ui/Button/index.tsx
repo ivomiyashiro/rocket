@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
-  type: 'button' | 'a' | 'link';
+  type: 'button' | 'a' | 'link' | 'submit';
   target?: '_blank' | '_self' | '_parent' | '_top';
   href?: string;
   bgColor: string;
@@ -28,9 +28,9 @@ export const Button = ({
     );
   }
 
-  if (type === 'button') {
+  if (type === 'button' || type === 'submit') {
     return (
-      <button className={ className } onClick={ onClick }>{ children }</button>
+      <button type={ type } className={ className } onClick={ onClick }>{ children }</button>
     );
   }
 

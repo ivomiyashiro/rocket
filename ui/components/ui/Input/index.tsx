@@ -13,6 +13,7 @@ interface Props {
   withSpinner?: boolean;
   error: string;
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleIncreaseQuantity?: () => void;
   handleDecreaseQuantity?: () => void;
@@ -24,7 +25,7 @@ export const Input = ({
   name = '', id = '',
   withError = true, withSpinner = false,
   textField, error,
-  onBlur, onChange,
+  onBlur, onChange, onFocus,
   handleIncreaseQuantity, handleDecreaseQuantity
 }: Props) => {
 
@@ -49,6 +50,7 @@ export const Input = ({
             id={ id }
             onBlur={ onBlur }
             onChange={ onChange }
+            onFocus={ onFocus }
             onKeyPress={ handleInputNumberChange }
             className='w-full py-2 px-3 rounded-md text-sm bg-transparent outline-none'
           />

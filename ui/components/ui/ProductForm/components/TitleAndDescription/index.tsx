@@ -1,27 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import { Input, DashboardCard, TextArea } from 'components/ui';
+import { ProductFormContext } from 'context';
 
-interface Props {
-  titleValue: { value: string, error: string };
-  descriptionValue: { value: string, error: string };
-  handleTitleValue: Dispatch<SetStateAction<{ value: string, error: string }>>;
-  handleDescriptionValue: Dispatch<SetStateAction<{ value: string, error: string }>>;
-}
+export const TitleAndDescription = () => {
 
-export const TitleAndDescription = ({ 
-  titleValue,
-  descriptionValue, 
-  handleTitleValue, 
-  handleDescriptionValue 
-}: Props) => {
-
-  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleTitleValue((prev) => ({ ...prev, value: e.target.value }));
-  };
-
-  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    handleDescriptionValue((prev) => ({ ...prev, value: e.target.value }));
-  };
+  const { title, description, handleTitleValue, handleDescriptionValue } = useContext(ProductFormContext);
 
   return (
     <DashboardCard className='p-5 pb-0'>
@@ -29,16 +12,16 @@ export const TitleAndDescription = ({
         type='text' 
         label='Title'
         placeholder='Short sleev t-shirt'
-        inputValue={ titleValue.value }
-        error={ titleValue.error }
-        onChange={ handleTitleChange }
+        inputValue={ title.value }
+        error={ title.error }
+        onChange={ handleTitleValue }
       />
       <TextArea
         label='Description'
         placeholder=''
-        textAreaValue={ descriptionValue.value }
-        error={ descriptionValue.error }
-        onChange={ handleDescriptionChange }
+        textAreaValue={ description.value }
+        error={ description.error }
+        onChange={ handleDescriptionValue }
       />
     </DashboardCard>
   );

@@ -1,6 +1,7 @@
 import { ChangeEvent, Dispatch, FocusEvent, SetStateAction } from 'react';
 import { MoneyIcon } from 'components/icons';
 import { Input, DashboardCard } from 'components/ui';
+import { formatPriceNumber } from 'helpers';
 
 interface Props {
   priceValue: { value: string, error: string };
@@ -28,8 +29,8 @@ export const Pricing = ({
     if (isNaN(Number(e.target.value))) {
       return handlePriceValue((prev) => ({ ...prev, value: '0.00' }));
     } 
-
-    const formatedPrice = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(Number(e.target.value));
+    
+    const formatedPrice = formatPriceNumber({ value: e.target.value });
     handlePriceValue((prev) => ({ ...prev, value: formatedPrice }));
   };
 
@@ -38,7 +39,7 @@ export const Pricing = ({
       return handleDiscountPriceValue((prev) => ({ ...prev, value: '0.00' }));
     } 
 
-    const formatedPrice = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(Number(e.target.value));
+    const formatedPrice = formatPriceNumber({ value: e.target.value });
     handleDiscountPriceValue((prev) => ({ ...prev, value: formatedPrice }));
   };
 

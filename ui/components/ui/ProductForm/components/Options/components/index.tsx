@@ -1,6 +1,6 @@
 export * from './OptionsForm';
 export * from './OptionsList';
 export * from './OptionNameEdit';
-export { default as OptionCard } from './OptionCard';
-export { default as OptionsInputValuesList } from './OptionsInputValuesList';
-export { default as OptionsValuesInput } from './OptionValuesInput';
+export * from './OptionCard';
+export * from './OptionsInputValuesList';
+export * from './OptionValuesInput';

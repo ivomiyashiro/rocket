@@ -1,13 +1,13 @@
-import { IOption } from 'interfaces';
-import { useVariants } from './useVariants';
+import { useContext } from 'react';
+
+import { ProductFormContext } from 'context';
+
 import { DashboardCard } from 'components/ui';
 import { VariantTableRow } from './VariantTableRow';
 
-interface Props { options: IOption[]; }
+export const Variants = () => {
 
-export const Variants = ({ options }: Props) => {
-
-  const { variants, setVariants } = useVariants({ options });
+  const { variants } = useContext(ProductFormContext);
 
   return (
     <>
@@ -31,13 +31,14 @@ export const Variants = ({ options }: Props) => {
               <tbody>
                 {
                   variants.map((variant, i) => {
-                    return (
-                      <VariantTableRow 
-                        key={ i }
-                        variant={ variant }
-                        handleVariants={ setVariants }
-                      />
-                    );
+                    if (variant.name !== '' && variant.name.slice(-1) !== ' ') {
+                      return (
+                        <VariantTableRow 
+                          key={ i }
+                          variant={ variant }
+                        />
+                      );
+                    }
                   })
                 }
               </tbody>

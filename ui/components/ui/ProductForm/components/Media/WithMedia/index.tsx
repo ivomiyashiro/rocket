@@ -1,6 +1,4 @@
 import { Dispatch, SetStateAction } from 'react';
-import { SortableContainer } from 'react-sortable-hoc';
-
 import { ImageCard } from 'components/ui';
 
 interface Props {
@@ -9,7 +7,7 @@ interface Props {
   handleProductMedia: Dispatch<SetStateAction<{ id: string; url: string; isChecked: boolean }[]>>;
 }
 
-const WithMedia = ({ 
+export const WithMedia = ({ 
   mediaList,
   handleClick,
   handleProductMedia,
@@ -21,10 +19,9 @@ const WithMedia = ({
           mediaList.map((image, i) => {
             return (
               <ImageCard
-                key={ i } 
-                index={ i }
-                image={ image }
-                handleProductMedia={ handleProductMedia }
+                key={ i }
+                media={ image }
+                handleCheckState={ handleProductMedia }
               />
             );
           })
@@ -46,5 +43,3 @@ const WithMedia = ({
     </>
   );
 };
-
-export default SortableContainer<Props>(WithMedia);

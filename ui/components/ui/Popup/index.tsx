@@ -24,7 +24,7 @@ export const Popup = ({
     <div className={ `bg-white rounded-lg ${ className }` }>
       <div className='flex items-center justify-between p-4 px-5 border-b'>
         <h3 className='text-xl font-medium'>{ title }</h3>
-        <button className='text-2xl hover:bg-gray-100 px-2 flex items-center justify-center rounded-md' onClick={ () => handleClose(false) }>
+        <button type='button' className='text-2xl hover:bg-gray-100 px-2 flex items-center justify-center rounded-md' onClick={ () => handleClose(false) }>
           &times;
         </button>
       </div>

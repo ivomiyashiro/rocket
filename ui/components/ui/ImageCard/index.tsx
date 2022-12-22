@@ -1,34 +1,24 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { SortableElement } from 'react-sortable-hoc';
+
+import { IProductFormMedia } from 'context';
 
 import { GridIcon } from 'components/icons';
 
 interface Props {
-  image: { id: string; url: string; isChecked: boolean };
-  handleProductMedia: Dispatch<SetStateAction<{id: string; url: string; isChecked: boolean}[]>>;
+  id: string;
+  media: IProductFormMedia;
+  handleCheckState: ({ variantID, imageID }: { variantID: string; imageID: string; }) => void
 }
 
-const ImageCard = ({ image, handleProductMedia }: Props) => {
+export const ImageCard = ({ id, media, handleCheckState }: Props) => {
   
-  const { id, url, isChecked } = image;
+  const { id: imageID, url, isChecked } = media;
   const [isHover, setHover] = useState(false);
-
-  const handleInputChange = () => {
-    handleProductMedia(prev => (
-      prev.map(image => {
-        if (image.id !== id) return image;
-        return {
-          ...image,
-          isChecked: !isChecked
-        };
-      })
-    ));
-  };
 
   return (
     <div
-      className='flex items-center justify-center border border-gray-300 w-full h-dashboard-add-product-image-sm overflow-hidden relative rounded-md p-4 first:col-dashboard-add-product-first-img first:row-dashboard-add-product-first-img first:h-dashboard-add-product-image-base'
+      className='z-30 flex items-center justify-center border border-gray-300 w-full h-dashboard-add-product-image-sm overflow-hidden relative rounded-md p-4 first:col-dashboard-add-product-first-img first:row-dashboard-add-product-first-img first:h-dashboard-add-product-image-base'
       onMouseEnter={ () => setHover(true) }
       onMouseLeave={ () => setHover(false) }
     >
@@ -47,14 +37,10 @@ const ImageCard = ({ image, handleProductMedia }: Props) => {
         (isHover || isChecked)
         &&
         <div className='absolute w-full h-full bg-black bg-opacity-50 flex justify-between p-3 top-0 items-start text-white'>
-          <input className='w-4 h-4' type="checkbox" checked={ isChecked } onChange={ handleInputChange } />
-          {
-            !isChecked && <GridIcon size="22px" />
-          }
+          <input className='w-4 h-4' type="checkbox" checked={ isChecked } onChange={ () => handleCheckState({ variantID: id, imageID: imageID }) } />
+          { !isChecked && <GridIcon size="22px" /> }
         </div>
       }
     </div>
   );
 };
-
-export default SortableElement<Props>(ImageCard);

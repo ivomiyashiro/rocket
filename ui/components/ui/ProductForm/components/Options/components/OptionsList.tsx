@@ -1,39 +1,27 @@
-import { Dispatch, SetStateAction } from 'react';
-import { SortableContainer } from 'react-sortable-hoc';
+import { useContext } from 'react';
+import { ProductFormContext } from 'context';
+import { OptionCard, OptionNameEdit } from './';
 
-import { IOption } from 'interfaces';
+export const OptionsList = () => {
 
-import { OptionCard, OptionNameEdit } from '.';
+  const { options } = useContext(ProductFormContext);
 
-interface Props {
-  options: IOption[];
-  handleOptions:Dispatch<SetStateAction<IOption[]>>
-  handleWithOptions: Dispatch<SetStateAction<boolean>>;
-}
-
-const OptionsList = ({ options, handleOptions, handleWithOptions }: Props) => {
   return (
     <div>
       {
         options.map((option, i) => {
           if (option.editing) {
             return (
-              <OptionNameEdit
-                key={ i } 
-                option={ option } 
-                handleOptions={ handleOptions } 
-                handleWithOptions={ handleWithOptions }
-              />
+              <OptionNameEdit key={ i } option={ option } />
             );
           }
         
           return (
-            <OptionCard key={ i } index={ i } option={ option } handleOptions={ handleOptions } />
+            <OptionCard key={ i } option={ option } 
+            />
           );
         })
       }
     </div>
   );
 };
-
-export default SortableContainer<Props>(OptionsList);
