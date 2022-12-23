@@ -18,7 +18,7 @@ export const ImageCard = ({ id, media, handleCheckState }: Props) => {
 
   return (
     <div
-      className='z-30 flex items-center justify-center border border-gray-300 w-full h-dashboard-add-product-image-sm overflow-hidden relative rounded-md p-4 first:col-dashboard-add-product-first-img first:row-dashboard-add-product-first-img first:h-dashboard-add-product-image-base'
+      className='z-30 flex items-center justify-center border border-gray-300 w-full h-[139px] overflow-hidden relative rounded-md p-4 first:col-dashboard-add-product-first-img first:row-dashboard-add-product-first-img'
       onMouseEnter={ () => setHover(true) }
       onMouseLeave={ () => setHover(false) }
     >
