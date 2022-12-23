@@ -114,7 +114,7 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   const handleOptionCardSortEnd = ({ e }: { e: DragEndEvent }) => {
     const { active, over } = e;
-    
+
     const oldIndex = active.data?.current?.sortable?.index;
     const newIndex = over?.data?.current?.sortable?.index;
 
@@ -564,17 +564,6 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
               images: arrayMove(variant.images, oldIndex, newIndex)
             };
           })
-          // options: state.options.map(opt => {
-          //   if (opt.id !== optID) return opt; 
-          //   const oldIndex = active.data?.current?.sortable?.index;
-          //   const newIndex = over?.data?.current?.sortable?.index;
-
-            
-          //   return { 
-          //     ...opt, 
-          //     values: arrayMove(opt.values, oldIndex, newIndex)
-          //   };
-          // })
         }
       });
     }
