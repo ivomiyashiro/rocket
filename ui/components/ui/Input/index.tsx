@@ -58,10 +58,10 @@ export const Input = ({
             (withSpinner && type === 'number' && handleDecreaseQuantity && handleIncreaseQuantity) 
             && 
             <div className='flex flex-col h-full'>
-              <button className='flex items-center justify-center bg-gray-200 m-px mr-2px rounded-md w-4 h-4' onClick={ handleIncreaseQuantity }>
+              <button type='button' className='flex items-center justify-center bg-gray-200 m-px mr-2px rounded-md w-4 h-4 outline-none' onClick={ handleIncreaseQuantity }>
                 <TriangeUpIcon size='12px' />
               </button>
-              <button className='flex items-center justify-center bg-gray-200 m-px mr-2px rounded-md w-4 h-4' onClick={ handleDecreaseQuantity }>
+              <button type='button' className='flex items-center justify-center bg-gray-200 m-px mr-2px rounded-md w-4 h-4 outline-none' onClick={ handleDecreaseQuantity }>
                 <TriangleDownIcon size='12px' />
               </button>
             </div>
