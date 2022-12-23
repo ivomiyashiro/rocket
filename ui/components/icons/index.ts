@@ -19,3 +19,4 @@ export * from './Plus';
 export * from './Delete';
 export * from './TriangleUp';
 export * from './TriangleDown';
+export * from './Move';
