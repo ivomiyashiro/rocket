@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useMedia } from 'hooks';
 import { IProductFormMedia, ProductFormContext } from 'context';
 
-import { ImageCard, Spinner } from 'components/ui';
+import { ImageCard, SortableContainer, SortableItem, Spinner } from 'components/ui';
 
 interface Props {
   variantID: string;
@@ -12,7 +12,13 @@ interface Props {
 
 export const VariantMedia = ({ variantID, media }: Props) => {
   
-  const { imgSelectedCount, handleVariantMedia, handleToggleImageCheckState, handleDeleteImages } = useContext(ProductFormContext);
+  const { 
+    imgSelectedCount, 
+    handleVariantMedia, 
+    handleToggleImageCheckState, 
+    handleDeleteImages,
+    handleImageSortEnd
+  } = useContext(ProductFormContext);
   
   const {
     isLoading,
@@ -32,52 +38,59 @@ export const VariantMedia = ({ variantID, media }: Props) => {
         {
           imgSelectedCount > 0
           &&
-          <button className='text-sm text-red-500 cursor-pointer hover:underline' onClick={ () => handleDeleteImages({ variantID }) }> Delete files </button>
+          <button className='text-sm text-red-500 cursor-pointer hover:underline' onClick={ () => handleDeleteImages({ variantID }) }> 
+            Delete files 
+          </button>
         }
       </div>
-      <div 
-        className='grid grid-cols-4 gap-[0.5rem] mt-4'
-        onDrop={ handleDrop }
-        onDragOver={ handleDragEnter }
-        onDragEnter={ handleDragEnter }
-        onDragLeave={ handleDragLeave }
+      <SortableContainer 
+        items={ media } 
+        handleItems={ (e) => handleImageSortEnd({ variantID, e }) }
       >
-        <button type='button' className='w-[139px] h-[139px] border border-dashed border-gray-300 flex items-center justify-center rounded-md hover:bg-gray-50 outline-none' onClick={ handleClick }>
-          <div className='p-1 px-2 border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
-            <p className='text-xs font-medium'>Add image</p>
-          </div>
-          <input type="file" ref={ inputRef } onChange={ handleInputChange } hidden />
-        </button>
+        <div 
+          className='grid grid-cols-4 gap-[0.5rem] mt-4'
+          onDrop={ handleDrop }
+          onDragOver={ handleDragEnter }
+          onDragEnter={ handleDragEnter }
+          onDragLeave={ handleDragLeave }
+        >
+          <button type='button' className='w-[139px] h-[139px] border border-dashed border-gray-300 flex items-center justify-center rounded-md hover:bg-gray-50 outline-none' onClick={ handleClick }>
+            <div className='p-1 px-2 border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
+              <p className='text-xs font-medium'> Add image </p>
+            </div>
+            <input type="file" ref={ inputRef } onChange={ handleInputChange } hidden />
+          </button>
+          {
+            (media?.length !== 0)
+            &&
+            media?.map((img, i) => {
+              return (
+                <SortableItem key={ i } id={ img.id }>
+                  <ImageCard
+                    id={ variantID }
+                    media={ img }
+                    handleCheckState={ handleToggleImageCheckState }
+                  />
+                </SortableItem>
+              );
+            })
+          }
+        </div>
         {
-          (media?.length !== 0)
+          drag
           &&
-          media?.map((img, i) => {
-            return (
-              <ImageCard
-                key={ i } 
-                index={ i }
-                id={ variantID }
-                media={ img }
-                handleCheckState={ handleToggleImageCheckState }
-              />
-            );
-          })
+          <div className='flex items-center justify-center pointer-events-none top-0 w-full h-full z-30 absolute border border-dashed border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
+            <p className='text-sm'>Drop the image to upload.</p>
+          </div>
         }
-      </div>
-      {
-        drag
-        &&
-        <div className='flex items-center justify-center pointer-events-none top-0 w-full h-full z-30 absolute border border-dashed border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
-          <p className='text-sm'>Drop the image to upload.</p>
-        </div>
-      }
-      {
-        isLoading
-        &&
-        <div className='flex items-center justify-center pointer-events-none top-0 w-full h-full z-30 absolute border border-dashed border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
-          <Spinner color='indigo-600' />
-        </div>
-      }
+        {
+          isLoading
+          &&
+          <div className='flex items-center justify-center pointer-events-none top-0 w-full h-full z-30 absolute border border-dashed border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
+            <Spinner color='indigo-600' />
+          </div>
+        }
+      </SortableContainer>
     </div>
   );
 };
