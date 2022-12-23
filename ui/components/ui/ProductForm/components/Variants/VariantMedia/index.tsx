@@ -16,7 +16,7 @@ export const VariantMedia = ({ variantID, media }: Props) => {
     imgSelectedCount, 
     handleVariantMedia, 
     handleToggleImageCheckState, 
-    handleDeleteImages,
+    handleDeleteVariantImages,
     handleImageSortEnd
   } = useContext(ProductFormContext);
   
@@ -38,7 +38,7 @@ export const VariantMedia = ({ variantID, media }: Props) => {
         {
           imgSelectedCount > 0
           &&
-          <button className='text-sm text-red-500 cursor-pointer hover:underline' onClick={ () => handleDeleteImages({ variantID }) }> 
+          <button className='text-sm text-red-500 cursor-pointer hover:underline' onClick={ () => handleDeleteVariantImages({ variantID }) }> 
             Delete files 
           </button>
         }
@@ -69,7 +69,7 @@ export const VariantMedia = ({ variantID, media }: Props) => {
                   <ImageCard
                     id={ variantID }
                     media={ img }
-                    handleCheckState={ handleToggleImageCheckState }
+                    handleCheckState={ () => handleToggleImageCheckState({ imageID: img.id, variantID }) }
                   />
                 </SortableItem>
               );

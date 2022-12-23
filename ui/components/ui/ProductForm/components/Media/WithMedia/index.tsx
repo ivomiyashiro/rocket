@@ -1,28 +1,32 @@
-import { Dispatch, SetStateAction } from 'react';
-import { ImageCard } from 'components/ui';
+import { useContext } from 'react';
+import { IProductFormMedia, ProductFormContext } from 'context';
+import { ImageCard, SortableContainer, SortableItem } from 'components/ui';
 
 interface Props {
-  mediaList: { id: string; url: string; isChecked: boolean }[];
+  mediaList: IProductFormMedia[];
   handleClick: () => void;
-  handleProductMedia: Dispatch<SetStateAction<{ id: string; url: string; isChecked: boolean }[]>>;
 }
 
-export const WithMedia = ({ 
-  mediaList,
-  handleClick,
-  handleProductMedia,
-}: Props) => {
+export const WithMedia = ({ mediaList, handleClick }: Props) => {
+
+  const { handleToggleGeneralImageCheckState, handleGeneralImageSortEnd } = useContext(ProductFormContext);
+
   return (
-    <>
+    <SortableContainer 
+      items={ mediaList }
+      handleItems={ (e) => handleGeneralImageSortEnd({ e }) }
+    >
       <div className='grid w-full gap-4 grid-cols-3 md:grid-cols-4'>
         {
           mediaList.map((image, i) => {
             return (
-              <ImageCard
-                key={ i }
-                media={ image }
-                handleCheckState={ handleProductMedia }
-              />
+              <SortableItem key={ i } index={ i } id={ image.id } withGridLayout>
+                <ImageCard
+                  media={ image }
+                  withGridLayout
+                  handleCheckState={ () => handleToggleGeneralImageCheckState({ imageID: image.id }) }
+                />
+              </SortableItem>
             );
           })
         }
@@ -40,6 +44,6 @@ export const WithMedia = ({
           </div>
         }
       </div>
-    </>
+    </SortableContainer>
   );
 };

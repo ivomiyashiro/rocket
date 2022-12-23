@@ -1,4 +1,4 @@
-import { IProductForm, IProductFormOption, IProductFormVariant } from './';
+import { IProductForm, IProductFormMedia, IProductFormOption, IProductFormVariant } from './';
 
 type AuthActionType =
  | { type: '[PRODUCT FORM] - Change title value', payload: { value: string } }
@@ -7,6 +7,7 @@ type AuthActionType =
  | { type: '[PRODUCT FORM] - Reset product options' }
  | { type: '[PRODUCT FORM] - Handle options', payload: { options: IProductFormOption[] } }
  | { type: '[PRODUCT FORM] - Handle variants', payload: { variants: IProductFormVariant[] } }
+ | { type: '[PRODUCT FORM] - Handle images', payload: { images: IProductFormMedia[] }}
 
 export const productFormReducer = ( state: IProductForm, action: AuthActionType ): IProductForm => {
 
@@ -55,7 +56,13 @@ export const productFormReducer = ( state: IProductForm, action: AuthActionType 
     return {
       ...state,
       variants: [ ...action.payload.variants ]
-    };  
+    };
+
+  case '[PRODUCT FORM] - Handle images':
+    return {
+      ...state,
+      images: [ ...action.payload.images ]
+    };
 
   default:
     return state;

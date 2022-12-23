@@ -48,7 +48,16 @@ interface ContextProps extends IProductForm {
   handleFormatPrice: ({ id }: { id: string; }) => void;
   handleToggleImageCheckState: ({ variantID, imageID }: { variantID: string; imageID: string }) => void;
   handleImageSortEnd: ({ variantID, e }: { variantID: string; e: DragEndEvent }) => void;
-  handleDeleteImages: ({ variantID }: { variantID: string }) => void;
+  handleDeleteVariantImages: ({ variantID }: { variantID: string }) => void;
+  
+  // Images --->
+
+  handleAddGeneralImage: ({ imgeUrl }: { imgeUrl: string }) => void
+  handleDeleteGeneralImage: () => void;
+  handleToggleGeneralImageCheckState: ({ imageID }: { imageID: string }) => void;
+  handleGeneralImageSortEnd: ({ e }: { e: DragEndEvent }) => void;
+
+  // <--- Images
 }
 
 

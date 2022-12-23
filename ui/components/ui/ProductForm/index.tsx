@@ -4,7 +4,7 @@ import { TitleAndDescription, Media, Pricing, Options, Variants } from './compon
 
 export const ProductForm = () => {
 
-  const { options, handleSubmit } = useContext(ProductFormContext);    
+  const { options, images, handleSubmit } = useContext(ProductFormContext);    
 
   return (
     <form onSubmit={ handleSubmit }>
@@ -15,7 +15,10 @@ export const ProductForm = () => {
           {
             options.length > 0
               ? (
-                <Variants />
+                <>
+                  <Variants />
+                  <Media productMedia={ images } />
+                </>
               )
               : (
                 'hola'
@@ -30,7 +33,7 @@ export const ProductForm = () => {
           {/* <Media productMedia={ mediaValue } handleProductMedia={ setMediaValue } /> */}
         </div>
         <div className='flex-dashboard-add-product-col-2 min-w-0'>
-
+          pepe
         </div>
         <div className='flex-dashboard-add-product-col-1 min-w-dashboard-add-product-col-1'>
           <button>Create</button>

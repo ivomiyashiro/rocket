@@ -1,12 +1,11 @@
 import { useReducer, ReactNode, FormEvent, ChangeEvent, FocusEvent, useState, useEffect } from 'react';
-import { arrayMoveImmutable } from 'array-move';
+import { DragEndEvent } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 
 import { formatPriceNumber, getArrayCombinatios } from 'helpers';
 
 import { IProductFormOption } from './init_state.context';
 import { ProductFormContext, productFormReducer, PRODUCT_FORM_INIT_STATE } from './';
-import { DragEndEvent } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
 
 export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
@@ -598,7 +597,7 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const handleDeleteImages = ({ variantID }: { variantID: string }) => {
+  const handleDeleteVariantImages = ({ variantID }: { variantID: string }) => {
     setImgSelectedCount(0);
     dispatch({
       type: '[PRODUCT FORM] - Handle variants',
@@ -616,6 +615,74 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // <------- VARIANTS
+
+  // IMAGES ------->
+
+  const handleAddGeneralImage = ({ imgeUrl }: { imgeUrl: string }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Handle images',
+      payload: {
+        images: [
+          ...state.images,
+          {
+            id: Math.random().toString(),
+            isChecked: false,
+            url: imgeUrl
+          }
+        ]
+      }
+    });
+  };
+
+  const handleDeleteGeneralImage = () => {
+    setImgSelectedCount(0);
+    dispatch({
+      type: '[PRODUCT FORM] - Handle images',
+      payload: {
+        images: state.images.filter(img => img.isChecked === false)
+      }
+    });
+  };
+
+  const handleToggleGeneralImageCheckState = ({ imageID }: { imageID: string }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Handle images',
+      payload: {
+        images: state.images.map(img => {
+          if (img.id !== imageID) return img;
+
+          if (!img.isChecked) {
+            setImgSelectedCount(prev => prev + 1);
+          } else {
+            setImgSelectedCount(prev => prev - 1);
+          }
+        
+          return {
+            ...img,
+            isChecked: !img.isChecked
+          };
+        })
+      }
+    });
+  };
+
+  const handleGeneralImageSortEnd = ({ e }: { e: DragEndEvent }) => {
+    const { active, over } = e;
+
+    const oldIndex = active.data?.current?.sortable?.index;
+    const newIndex = over?.data?.current?.sortable?.index;
+
+    if (active.id !== over?.id) {
+      dispatch({
+        type: '[PRODUCT FORM] - Handle images',
+        payload: {
+          images: arrayMove(state.images, oldIndex, newIndex)
+        }
+      });
+    }
+  };
+
+  // <------- IMAGES
 
   return (
     <ProductFormContext.Provider value={ {
@@ -656,7 +723,12 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
       handleFormatDiscountPrice,
       handleToggleImageCheckState,
       handleImageSortEnd,
-      handleDeleteImages
+      handleDeleteVariantImages,
+
+      handleAddGeneralImage,
+      handleDeleteGeneralImage,
+      handleToggleGeneralImageCheckState,
+      handleGeneralImageSortEnd,
     } }>
       { children }
     </ProductFormContext.Provider>

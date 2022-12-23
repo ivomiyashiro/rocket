@@ -3,22 +3,23 @@ import Image from 'next/image';
 
 import { IProductFormMedia } from 'context';
 
-import { GridIcon } from 'components/icons';
+import { GridIcon, MoveIcon } from 'components/icons';
 
 interface Props {
-  id: string;
+  id?: string;
   media: IProductFormMedia;
-  handleCheckState: ({ variantID, imageID }: { variantID: string; imageID: string; }) => void
+  withGridLayout?: boolean;
+  handleCheckState: any
 }
 
-export const ImageCard = ({ id, media, handleCheckState }: Props) => {
+export const ImageCard = ({ id, media, withGridLayout = false, handleCheckState }: Props) => {
   
-  const { id: imageID, url, isChecked } = media;
+  const { url, isChecked } = media;
   const [isHover, setHover] = useState(false);
 
   return (
     <div
-      className='z-30 flex items-center justify-center border border-gray-300 w-full h-[139px] overflow-hidden relative rounded-md p-4 first:col-dashboard-add-product-first-img first:row-dashboard-add-product-first-img'
+      className={ `z-30 flex items-center justify-center border border-gray-300 w-full overflow-hidden relative rounded-md p-4 ${ withGridLayout ? 'first:col-dashboard-add-product-first-img first:row-dashboard-add-product-first-img first:h-full' : 'h-[138px]' }` }
       onMouseEnter={ () => setHover(true) }
       onMouseLeave={ () => setHover(false) }
     >
@@ -36,9 +37,14 @@ export const ImageCard = ({ id, media, handleCheckState }: Props) => {
       {
         (isHover || isChecked)
         &&
-        <div className='absolute w-full h-full bg-black bg-opacity-50 flex justify-between p-3 top-0 items-start text-white'>
-          <input className='w-4 h-4' type="checkbox" checked={ isChecked } onChange={ () => handleCheckState({ variantID: id, imageID: imageID }) } />
-          { !isChecked && <GridIcon size="22px" /> }
+        <div className='absolute w-full h-full bg-black bg-opacity-50 p-3 top-0 items-start text-white'>
+          <div className='flex justify-between'>
+            <input className='w-4 h-4' type="checkbox" checked={ isChecked } onChange={ handleCheckState } />
+            { !isChecked && <GridIcon size="22px" /> }
+          </div>
+          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+            <MoveIcon size='22px' />
+          </div>
         </div>
       }
     </div>

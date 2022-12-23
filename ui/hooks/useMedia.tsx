@@ -3,9 +3,9 @@ import { IProductFormMedia } from 'context';
 import { uploadImage } from 'services';
 
 interface Props {
-  id: string;
+  id?: string;
   media: IProductFormMedia[];
-  handleMedia: ({ id, imageUrl }: { id: string; imageUrl: string }) => void;
+  handleMedia: any
 }
 
 const MAX_AMOUNT_IMG = 5;
@@ -23,6 +23,10 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
     setLoading(true);
     let productMediaLength = media.length;
 
+    if (e.target.files?.length === 0) {
+      return setLoading(false);
+    }
+
     for (let i = 0; i < e.target.files!.length; i++) {
       const file = e.target.files![i];
       const fileTypeError = file.type !== 'image/jpeg' && file.type !== 'image/png';
@@ -36,7 +40,7 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
       } else if (e.target.files && e.target.files[i]) {
         uploadImage(file)
           .then(resp => {
-            handleMedia({ id, imageUrl: resp });
+            id ? handleMedia({ id, imageUrl: resp }) : handleMedia({ imgeUrl: resp });
             setLoading(false);
           })
           .catch(error => console.log(error));  
@@ -48,8 +52,13 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
+
     setLoading(true);
     let productMediaLen = media.length;
+
+    if (e.dataTransfer.files?.length === 0) {
+      return setLoading(false);
+    }
 
     for (let i = 0; i < e.dataTransfer.files.length; i++) {
       const file = e.dataTransfer.files[i];
@@ -65,7 +74,7 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
       } else if (e.dataTransfer.files && e.dataTransfer.files[i]) {
         uploadImage(file)
           .then(resp => {
-            handleMedia({ id, imageUrl: resp });
+            id ? handleMedia({ id, imageUrl: resp }) : handleMedia({ imgeUrl: resp });
             setLoading(false);
           })
           .catch(error => console.log(error));  
@@ -92,6 +101,7 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
     inputRef,
     error,
     isLoading,
+    handleError: setError,
     handleClick,
     handleInputChange,
     handleDrop,
