@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const SortableItem = ({ children, id, disabled = false }: Props) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({ id });
     
   const style = {
     display: 'block',
