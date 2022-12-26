@@ -3,7 +3,7 @@ import { TriangeUpIcon, TriangleDownIcon } from 'components/icons';
 
 interface Props {
   inputValue: string;
-  placeholder: string;
+  placeholder?: string;
   type: 'email' | 'text' | 'password' | 'number';
   label?: string;
   name?: string;
@@ -44,7 +44,7 @@ export const Input = ({
         <div className='flex w-full'>
           <input 
             type={ INPUT_TYPE }
-            placeholder={ placeholder }
+            placeholder={ placeholder || '' }
             value={ inputValue }
             name={ name }
             id={ id }
