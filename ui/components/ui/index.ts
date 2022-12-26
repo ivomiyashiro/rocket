@@ -12,3 +12,4 @@ export * from './ProductForm';
 export * from './ImageCard';
 export * from './Spinner';
 export * from './Sortable';
+export * from './Select';
