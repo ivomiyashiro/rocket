@@ -1,18 +1,18 @@
 import { useContext } from 'react';
 
 import { useMedia } from 'hooks';
-import { IProductFormMedia, ProductFormContext } from 'context';
+import { ProductFormContext } from 'context';
 
 import { ImageIcon } from 'components/icons';
 import { DashboardCard, Spinner } from 'components/ui';
 import { WithoutMedia } from './WithoutMedia';
 import { WithMedia } from './WithMedia';
 
-interface Props { productMedia: IProductFormMedia[]; }
+export const Media = () => {
 
-export const Media = ({ productMedia }: Props) => {
-
-  const { 
+  const {
+    options,
+    images,
     imgSelectedCount,
     handleDeleteGeneralImage,
     handleAddGeneralImage
@@ -29,7 +29,7 @@ export const Media = ({ productMedia }: Props) => {
     handleDrop,
     handleDragEnter,
     handleDragLeave,
-  } = useMedia({ media: productMedia, handleMedia: handleAddGeneralImage });
+  } = useMedia({ media: images, handleMedia: handleAddGeneralImage });
   
   return (
     <DashboardCard className='p-5'>
@@ -43,7 +43,9 @@ export const Media = ({ productMedia }: Props) => {
           )
           : (
             <div className='mb-5'>
-              <h3 className='font-medium'>General Media</h3>
+              <h3 className='font-medium'>
+                { options.length > 0 ? 'General Media' : 'Media'}
+              </h3>
             </div>
           )
       }
@@ -77,8 +79,8 @@ export const Media = ({ productMedia }: Props) => {
           </div>
         }
         {
-          productMedia?.length !== 0
-            ? <WithMedia mediaList={ productMedia } handleClick={ handleClick } />
+          images?.length !== 0
+            ? <WithMedia mediaList={ images } handleClick={ handleClick } />
             : <WithoutMedia drag={ drag } handleClick={ handleClick } />
         }
       </div>
