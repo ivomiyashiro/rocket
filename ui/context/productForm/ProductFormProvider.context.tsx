@@ -706,6 +706,25 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   // <------- STATUS
 
+  // ORGANIZATION ------->
+    
+  const handleVendorValue = ({ e } : { e: ChangeEvent<HTMLInputElement> }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change vendor value',
+      payload: { value: e.target.value } 
+    });
+  };
+
+  const handleCategoryValue = ({ e }: { e: ChangeEvent<HTMLInputElement> }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change category value',
+      payload: { value: e.target.value } 
+    });
+  };
+
+
+  // <------- ORGANIZATION
+
   return (
     <ProductFormContext.Provider value={ {
       ...state,
@@ -752,7 +771,10 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
       handleToggleGeneralImageCheckState,
       handleGeneralImageSortEnd,
 
-      toggleProductStatus
+      toggleProductStatus,
+      
+      handleVendorValue,
+      handleCategoryValue
     } }>
       { children }
     </ProductFormContext.Provider>

@@ -9,6 +9,8 @@ type AuthActionType =
  | { type: '[PRODUCT FORM] - Handle variants', payload: { variants: IProductFormVariant[] } }
  | { type: '[PRODUCT FORM] - Handle images', payload: { images: IProductFormMedia[] }}
  | { type: '[PRODUCT FORM] - Toggle product status', payload: { status: 'ACTIVE' | 'DRAFT' }}
+ | { type: '[PRODUCT FORM] - Change vendor value', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Change category value', payload: { value: string }}
 
 export const productFormReducer = ( state: IProductForm, action: AuthActionType ): IProductForm => {
 
@@ -69,6 +71,24 @@ export const productFormReducer = ( state: IProductForm, action: AuthActionType 
     return {
       ...state,
       status: action.payload.status
+    };
+
+  case '[PRODUCT FORM] - Change vendor value':
+    return {
+      ...state,
+      vendor: {
+        ...state.vendor,
+        value: action.payload.value
+      }
+    };
+
+  case '[PRODUCT FORM] - Change category value':
+    return {
+      ...state,
+      category: {
+        ...state.category,
+        value: action.payload.value
+      }
     };
 
   default:

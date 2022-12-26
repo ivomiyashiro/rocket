@@ -60,6 +60,10 @@ interface ContextProps extends IProductForm {
   // <--- Images
 
   toggleProductStatus: () => void;
+
+
+  handleVendorValue: ({ e }: {e: ChangeEvent<HTMLInputElement>}) => void;
+  handleCategoryValue: ({ e }: {e: ChangeEvent<HTMLInputElement>}) => void;
 }
 
 
