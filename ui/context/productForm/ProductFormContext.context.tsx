@@ -58,6 +58,8 @@ interface ContextProps extends IProductForm {
   handleGeneralImageSortEnd: ({ e }: { e: DragEndEvent }) => void;
 
   // <--- Images
+
+  toggleProductStatus: () => void;
 }
 
 

@@ -684,6 +684,28 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   // <------- IMAGES
 
+  // STATUS ------->
+
+  const toggleProductStatus = () => {
+    if (state.status === 'ACTIVE') {
+      return dispatch({
+        type: '[PRODUCT FORM] - Toggle product status',
+        payload: {
+          status: 'DRAFT'
+        }
+      });
+    }
+
+    return dispatch({
+      type: '[PRODUCT FORM] - Toggle product status',
+      payload: {
+        status: 'ACTIVE'
+      }
+    });
+  };
+
+  // <------- STATUS
+
   return (
     <ProductFormContext.Provider value={ {
       ...state,
@@ -729,6 +751,8 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
       handleDeleteGeneralImage,
       handleToggleGeneralImageCheckState,
       handleGeneralImageSortEnd,
+
+      toggleProductStatus
     } }>
       { children }
     </ProductFormContext.Provider>
