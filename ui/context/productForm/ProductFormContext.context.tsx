@@ -59,11 +59,35 @@ interface ContextProps extends IProductForm {
 
   // <--- Images
 
+  // Status --->
+
   toggleProductStatus: () => void;
 
+  // <--- Status
+
+  // Organization --->
 
   handleVendorValue: ({ e }: {e: ChangeEvent<HTMLInputElement>}) => void;
   handleCategoryValue: ({ e }: {e: ChangeEvent<HTMLInputElement>}) => void;
+
+  // <--- Organization
+
+  // Pricing --->
+
+  handlePriceChange: ({ value }: { value: string }) => void;
+  handleDiscountPriceChange: ({ value }: { value: string }) => void;
+
+  // <--- Pricing
+
+  // Inventory --->
+
+  handleProductSKU: ({ e }: { e: ChangeEvent<HTMLInputElement>; }) => void;
+  handleProductBarcode: ({ e }: { e: ChangeEvent<HTMLInputElement>; }) => void;
+  handleProductQuantityChange: ({ e }: { e: ChangeEvent<HTMLInputElement>; }) => void;
+  handleProductQuantityIncrese: () => void;
+  handleProductQuantityDecrese: () => void;
+
+  // <--- Inventory
 }
 
 

@@ -11,6 +11,11 @@ type AuthActionType =
  | { type: '[PRODUCT FORM] - Toggle product status', payload: { status: 'ACTIVE' | 'DRAFT' }}
  | { type: '[PRODUCT FORM] - Change vendor value', payload: { value: string }}
  | { type: '[PRODUCT FORM] - Change category value', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Change product price', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Change product discount price', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Change product quantity', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Change product SKU', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Change product barcode', payload: { value: string }}
 
 export const productFormReducer = ( state: IProductForm, action: AuthActionType ): IProductForm => {
 
@@ -89,6 +94,36 @@ export const productFormReducer = ( state: IProductForm, action: AuthActionType 
         ...state.category,
         value: action.payload.value
       }
+    };
+
+  case '[PRODUCT FORM] - Change product price':
+    return {
+      ...state,
+      price: action.payload.value
+    };
+
+  case '[PRODUCT FORM] - Change product discount price':
+    return {
+      ...state,
+      discountPrice: action.payload.value
+    };
+
+  case '[PRODUCT FORM] - Change product SKU':
+    return {
+      ...state,
+      sku: action.payload.value
+    };
+
+  case '[PRODUCT FORM] - Change product barcode':
+    return {
+      ...state,
+      barcode: action.payload.value
+    };
+
+  case '[PRODUCT FORM] - Change product quantity':
+    return {
+      ...state,
+      inventory: action.payload.value
     };
 
   default:

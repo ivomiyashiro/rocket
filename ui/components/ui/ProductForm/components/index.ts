@@ -5,3 +5,4 @@ export * from './Options';
 export * from './Variants';
 export * from './Status';
 export * from './Organization';
+export * from './Inventory';

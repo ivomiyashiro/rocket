@@ -722,8 +722,65 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-
   // <------- ORGANIZATION
+
+  // PRICING ------->
+    
+  const handlePriceChange = ({ value }: { value: string }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change product price',
+      payload: { value }
+    });
+  };
+
+  const handleDiscountPriceChange = ({ value }: { value: string }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change product discount price',
+      payload: { value }
+    });
+  };
+
+  // <------- PRICING
+
+  // INVENTORY ------->
+    
+  const handleProductSKU = ({ e }: { e: ChangeEvent<HTMLInputElement> }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change product SKU',
+      payload: { value: e.target.value }
+    });
+  };
+
+  const handleProductBarcode = ({ e }: { e: ChangeEvent<HTMLInputElement> }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change product barcode',
+      payload: { value: e.target.value }
+    });
+  };
+
+  const handleProductQuantityIncrese = () => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change product quantity',
+      payload: { value: (+state.inventory + 1).toString() }
+    });
+  };
+
+  const handleProductQuantityDecrese = () => {
+    if (state.inventory === '0') return;
+    dispatch({
+      type: '[PRODUCT FORM] - Change product quantity',
+      payload: { value: (+state.inventory - 1).toString() }
+    });
+  };
+
+  const handleProductQuantityChange = ({ e }: { e: ChangeEvent<HTMLInputElement> }) => {
+    dispatch({
+      type: '[PRODUCT FORM] - Change product quantity',
+      payload: { value: e.target.value }
+    });
+  };
+  
+  // <------- INVENTORY
 
   return (
     <ProductFormContext.Provider value={ {
@@ -772,9 +829,18 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
       handleGeneralImageSortEnd,
 
       toggleProductStatus,
-      
+
       handleVendorValue,
-      handleCategoryValue
+      handleCategoryValue,
+
+      handlePriceChange,
+      handleDiscountPriceChange,
+
+      handleProductSKU,
+      handleProductBarcode,
+      handleProductQuantityChange,
+      handleProductQuantityIncrese,
+      handleProductQuantityDecrese,
     } }>
       { children }
     </ProductFormContext.Provider>

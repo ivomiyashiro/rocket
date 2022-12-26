@@ -26,6 +26,11 @@ export interface IProductFormVariant {
 export interface IProductForm {
   title: { value: string; error: string };
   description: { value: string; error: string };
+  price?: string;
+  inventory: string;
+  sku: string;
+  barcode: string;
+  discountPrice?: string;
   options: IProductFormOption[];
   variants: IProductFormVariant[];
   vendor: { value: string; error: string };
@@ -39,6 +44,9 @@ export const PRODUCT_FORM_INIT_STATE: IProductForm = {
   description: { value: '', error: '' },
   options: [],
   variants: [],
+  inventory: '0',
+  sku: '',
+  barcode: '',
   vendor: { value: '', error: '' },
   category: { value: '', error: '' },
   status: 'ACTIVE',
