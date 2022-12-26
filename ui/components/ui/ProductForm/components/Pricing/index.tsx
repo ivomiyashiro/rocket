@@ -1,46 +1,32 @@
-import { ChangeEvent, Dispatch, FocusEvent, SetStateAction } from 'react';
-import { MoneyIcon } from 'components/icons';
-import { Input, DashboardCard } from 'components/ui';
+import { FocusEvent, useContext, useState } from 'react';
+
+import { ProductFormContext } from 'context';
 import { formatPriceNumber } from 'helpers';
 
-interface Props {
-  priceValue: { value: string, error: string };
-  discountPriceValue: { value: string, error: string };
-  handlePriceValue: Dispatch<SetStateAction<{ value: string, error: string }>>;
-  handleDiscountPriceValue: Dispatch<SetStateAction<{ value: string, error: string }>>;
-}
+import { MoneyIcon } from 'components/icons';
+import { Input, DashboardCard } from 'components/ui';
 
-export const Pricing = ({ 
-  priceValue,
-  discountPriceValue, 
-  handlePriceValue, 
-  handleDiscountPriceValue 
-}: Props) => {
+export const Pricing = () => {
 
-  const handleInputPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handlePriceValue((prev) => ({ ...prev, value: e.target.value }));
-  };
+  const { handlePriceChange, handleDiscountPriceChange } = useContext(ProductFormContext);
 
-  const handleDiscountPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleDiscountPriceValue((prev) => ({ ...prev, value: e.target.value }));
-  };
+  const [productPrice, setProductPrice] = useState('');
+  const [productDiscountPrice, setDiscountPrice] = useState('');
 
-  const handleInputPriceBlur = (e: FocusEvent<HTMLInputElement>) => {
-    if (isNaN(Number(e.target.value))) {
-      return handlePriceValue((prev) => ({ ...prev, value: '0.00' }));
-    } 
+  const handleInputDiscountPriceBlur = ({ e }: { e: FocusEvent<HTMLInputElement> }) => {
+    if (isNaN(Number(e.target.value))) { return setDiscountPrice('0.00'); } 
     
     const formatedPrice = formatPriceNumber({ value: e.target.value });
-    handlePriceValue((prev) => ({ ...prev, value: formatedPrice }));
+    setDiscountPrice(formatedPrice);
+    handlePriceChange({ value: formatedPrice });
   };
 
-  const handleInputDiscountPriceBlur = (e: FocusEvent<HTMLInputElement>) => {
-    if (isNaN(Number(e.target.value))) {
-      return handleDiscountPriceValue((prev) => ({ ...prev, value: '0.00' }));
-    } 
-
+  const handleInputPriceBlur = ({ e }: { e: FocusEvent<HTMLInputElement> }) => {
+    if (isNaN(Number(e.target.value))) { return setProductPrice('0.00'); } 
+    
     const formatedPrice = formatPriceNumber({ value: e.target.value });
-    handleDiscountPriceValue((prev) => ({ ...prev, value: formatedPrice }));
+    setProductPrice(formatedPrice);
+    handleDiscountPriceChange({ value: formatedPrice });
   };
 
   return (
@@ -49,21 +35,21 @@ export const Pricing = ({
         type='number' 
         label='Price'
         placeholder='0.00'
-        inputValue={ priceValue.value }
-        error={ priceValue.error }
+        inputValue={ productPrice }
+        error=''
         textField={ <MoneyIcon size='22px' /> }
-        onBlur={ handleInputPriceBlur }
-        onChange={ handleInputPriceChange }
+        onBlur={ (e) => handleInputPriceBlur({ e }) }
+        onChange={ (e) => setProductPrice(e.target.value) }
       />
       <Input
         type='number'
         label='Compare at price'
         placeholder='0.00'
-        inputValue={ discountPriceValue.value }
-        error={ discountPriceValue.error }
+        inputValue={ productDiscountPrice }
+        error=''
         textField={ <MoneyIcon size='22px' /> }
-        onBlur={ handleInputDiscountPriceBlur }
-        onChange={ handleDiscountPriceChange }
+        onBlur={ (e) => handleInputDiscountPriceBlur({ e }) }
+        onChange={ (e) => setDiscountPrice(e.target.value) }
       />
     </DashboardCard>
   );
