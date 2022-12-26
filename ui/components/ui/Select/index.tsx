@@ -5,9 +5,10 @@ interface Props {
   id: string;
   label?: string;
   options: string[];
+  onChange?: () => void;
 }
 
-export const Select = ({ id, label, options }: Props) => {
+export const Select = ({ id, label, options, onChange }: Props) => {
 
   const [option, setOption] = useState(options[0]);
   const [isFocus, setFocus] = useState(false);
@@ -22,7 +23,7 @@ export const Select = ({ id, label, options }: Props) => {
       { !!label && <p>label</p> }
       <select 
         id={ id } 
-        onChange={ handleSelectChange } 
+        onChange={ (e) => { handleSelectChange(e); !!onChange && onChange(); } } 
         onFocus={ () => setFocus(true) }
         onBlur={ () => setFocus(false) }
         className="absolute top-0 w-full h-full opacity-0"
