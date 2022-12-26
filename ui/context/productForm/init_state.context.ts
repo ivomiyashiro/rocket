@@ -30,7 +30,7 @@ export interface IProductForm {
   variants: IProductFormVariant[];
   vendor: { value: string; error: string };
   category: { value: string; error: string };
-  status: 'ACTIVE' | 'INACTIVE';
+  status: 'ACTIVE' | 'DRAFT';
   images: IProductFormMedia[];
 }
 
