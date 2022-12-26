@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { ProductFormContext } from 'context';
 import { TitleAndDescription, Media, Pricing, Options, Variants } from './components';
+import { Status } from './components/Status';
 
 export const ProductForm = () => {
 
@@ -18,6 +19,7 @@ export const ProductForm = () => {
                 <>
                   <Variants />
                   <Media productMedia={ images } />
+                  <Status />
                 </>
               )
               : (
