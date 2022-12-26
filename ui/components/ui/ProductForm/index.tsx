@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { ProductFormContext } from 'context';
-import { TitleAndDescription, Media, Pricing, Options, Variants } from './components';
-import { Status } from './components/Status';
+import { TitleAndDescription, Media, Pricing, Options, Variants, Status, Organization } from './components';
 
 export const ProductForm = () => {
 
@@ -19,7 +18,6 @@ export const ProductForm = () => {
                 <>
                   <Variants />
                   <Media productMedia={ images } />
-                  <Status />
                 </>
               )
               : (
@@ -34,8 +32,9 @@ export const ProductForm = () => {
           }
           {/* <Media productMedia={ mediaValue } handleProductMedia={ setMediaValue } /> */}
         </div>
-        <div className='flex-dashboard-add-product-col-2 min-w-0'>
-          pepe
+        <div className='flex-dashboard-add-product-col-2 min-w-0 flex flex-col gap-5'>
+          <Status />
+          <Organization />
         </div>
         <div className='flex-dashboard-add-product-col-1 min-w-dashboard-add-product-col-1'>
           <button>Create</button>
