@@ -1,4 +1,4 @@
-import { Button, Input } from 'components/ui';
+import { Button, Input, Spinner } from 'components/ui';
 import { useSignInCredential } from '../useSignInCredential';
 
 export const CredentialsSignInForm = () => {
@@ -23,7 +23,7 @@ export const CredentialsSignInForm = () => {
           id='email'
           inputValue={ emailInput.value }
           error={ emailInput.error }
-          handleInputValue={ setEmailInput }
+          onChange={ setEmailInput }
         />
         <Input 
           type='password'
@@ -33,16 +33,16 @@ export const CredentialsSignInForm = () => {
           id='password'
           inputValue={ passwordInput.value }
           error={ passwordInput.error }
-          handleInputValue={ setPasswordInput }
+          onChange={ setPasswordInput }
         />
         <div className='flex items-center gap-1 mt-2 mb-6'>
           <input type="checkbox" name="remember-me" id='remember-me'/>
           <label className='text-sm' htmlFor="remember-me">Remember me</label>
         </div>
-        <Button type='button' bgColor="bg-indigo-600" textColor="text-white">
+        <Button type='button' bgColor="indigo-600" textColor="white" className='w-full'>
           {
             isLoading
-              ? 'Cargando...'
+              ? <Spinner size={ 12 } color='white' />
               : 'Sign in'
           }
         </Button>

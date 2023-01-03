@@ -1,4 +1,4 @@
-import { Button, Input } from 'components/ui';
+import { Button, Input, Spinner } from 'components/ui';
 import { useSignUpCredentials } from '../useSignUpCredentials';
 
 export const CredentialsSignInForm = () => {
@@ -25,7 +25,7 @@ export const CredentialsSignInForm = () => {
           id='name'
           inputValue={ fullNameInput.value }
           error={ fullNameInput.error }
-          handleInputValue={ setFullNameInput }
+          onChange={ setFullNameInput }
         />
         <Input 
           type='email'
@@ -35,7 +35,7 @@ export const CredentialsSignInForm = () => {
           id='email'
           inputValue={ emailInput.value }
           error={ emailInput.error }
-          handleInputValue={ setEmailInput }
+          onChange={ setEmailInput }
         />
         <Input 
           type='password'
@@ -45,13 +45,13 @@ export const CredentialsSignInForm = () => {
           id='password'
           inputValue={ passwordInput.value }
           error={ passwordInput.error }
-          handleInputValue={ setPasswordInput }
+          onChange={ setPasswordInput }
         />
         <div className='mt-6'>
-          <Button type='button' bgColor="bg-indigo-600" textColor="text-white">
+          <Button type='button' bgColor="indigo-600" textColor="white" className='w-full'>
             {
               isLoading
-                ? 'Cargando...'
+                ? <Spinner size={ 12 } color='white' />
                 : 'Sign up'
             }
           </Button>
