@@ -4,7 +4,12 @@ import { useContext } from 'react';
 
 export const Organization = () => {
 
-  const { vendor, category, handleCategoryValue, handleVendorValue } = useContext(ProductFormContext);
+  const { 
+    vendor, 
+    category, 
+    handleCategoryValue, 
+    handleVendorValue 
+  } = useContext(ProductFormContext);
 
   return (
     <DashboardCard className='p-5' title='Product organization'>
@@ -13,14 +18,14 @@ export const Organization = () => {
         label='Product Category'
         inputValue={ category.value }
         error={ category.error }
-        onChange={ (e) => handleCategoryValue({ e }) }
+        onChange={ (e: any) => handleCategoryValue({ e }) }
       />
       <Input 
         type='text' 
         label='Vendor'
         inputValue={ vendor.value }
         error={ vendor.error }
-        onChange={ (e) => handleVendorValue({ e }) }
+        onChange={ (e: any) => handleVendorValue({ e }) }
       />
     </DashboardCard>
   );
