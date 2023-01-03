@@ -1,6 +1,6 @@
-import { Input, DashboardCard } from 'components/ui';
+import { ChangeEvent, useContext } from 'react';
 import { ProductFormContext } from 'context';
-import { useContext } from 'react';
+import { Input, DashboardCard } from 'components/ui';
 
 export const Organization = () => {
 
@@ -18,14 +18,14 @@ export const Organization = () => {
         label='Product Category'
         inputValue={ category.value }
         error={ category.error }
-        onChange={ (e: any) => handleCategoryValue({ e }) }
+        onChange={ (e: ChangeEvent) => handleCategoryValue({ e }) }
       />
       <Input 
         type='text' 
         label='Vendor'
         inputValue={ vendor.value }
         error={ vendor.error }
-        onChange={ (e: any) => handleVendorValue({ e }) }
+        onChange={ (e: ChangeEvent) => handleVendorValue({ e }) }
       />
     </DashboardCard>
   );
