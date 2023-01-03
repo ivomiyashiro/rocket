@@ -15,7 +15,7 @@ export const DashboardHeader = () => {
   return (
     <header className='h-dashboard-header flex items-center justify-between w-full px-4 fixed top-0 z-20 bg-white shadow-md'>
       <div className='hidden md:block min-w-dashboard-header-logo '>
-        <MainLogo href='/dashboard' />
+        <MainLogo href='/dashboard' iconColor='indigo-600' />
       </div>
       <div className='md:hidden'>
         <button className='h-10 px-2 rounded-md text-gray-600 hover:bg-gray-100' onClick={ () => setAsideMenuOpen(prev => !prev) }>
