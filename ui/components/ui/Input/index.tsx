@@ -14,7 +14,7 @@ interface Props {
   error: string;
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: any;
   handleIncreaseQuantity?: () => void;
   handleDecreaseQuantity?: () => void;
 }
