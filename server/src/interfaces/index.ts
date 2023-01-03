@@ -21,10 +21,15 @@ export interface IProduct {
   title: string;
   description: string;
   options: { name: string; values: string[] }[]
-  variants: IVariant[];
+  variants?: IVariant[];
+  price?: string;
+  discountPrice?: string;
+  inventory?: string;
+  sku?: string;
+  barcode?: string;
   vendor: string;
   category: string;
-  status: 'ACTIVE' | 'INACTIVE';
+  status: 'ACTIVE' | 'DRAFT';
   images: string[];
 }
 

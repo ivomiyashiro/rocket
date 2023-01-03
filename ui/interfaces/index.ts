@@ -7,35 +7,33 @@ export interface IUser {
 }
 
 export interface IProduct {
-  id?: string;
   title: string;
   description: string;
-  options: IOption[];
-  variants: IVariant[];
+  options?: { name: string; values: string[] }[];
+  variants?: IVariant[];
+  price?: string;
+  discountPrice?: string;
+  inventory?: string;
+  sku?: string;
+  barcode?: string;
   vendor: string;
   category: string;
-  status: 'ACTIVE' | 'INACTIVE';
-  images: IImage[];
+  status: 'ACTIVE' | 'DRAFT';
+  images: string[];
+}
+
+export interface IVariant {
+  name: string;
+  inventory: number;
+  price: number;
+  discountPrice: number;
+  sku: string;
+  barcode: string;
+  images: string[];
 }
 
 export interface IOption { 
   id: string;
   name: string;
   values: { id: number; name: string }[];
-}
-
-export interface IVariant {
-  id: string;
-  name: string;
-  inventory: string;
-  price: string;
-  discountPrice: string;
-  sku: string;
-  barcode: string;
-  images: IImage[];
-}
-
-export interface IImage {
-  id: string;
-  url: string;
 }

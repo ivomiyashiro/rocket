@@ -2,7 +2,6 @@ import { Schema, model } from 'mongoose';
 import { IProduct } from '../interfaces';
 import { VariantScheme } from './Variant.model';
 
-
 const ProductSchema = new Schema<IProduct>({
   title: {
     type: String,
@@ -23,9 +22,25 @@ const ProductSchema = new Schema<IProduct>({
     }],
     default: []
   },
+  price: {
+    type: String,
+  },
+  discountPrice: {
+    type: String
+  },
+  inventory: {
+    type: String,
+    default: '0',
+    require: true
+  },
+  sku: {
+    type: String,
+  },
+  barcode: {
+    type: String,
+  },
   variants: {
-    type: [VariantScheme],
-    default: null
+    type: [VariantScheme]
   },
   vendor: {
     type: String,
@@ -37,7 +52,7 @@ const ProductSchema = new Schema<IProduct>({
   },
   status: {
     type: String,
-    enum : ['ACTIVE', 'INACTIVE'],
+    enum : ['ACTIVE', 'DRAFT'],
     default: 'ACTIVE'
   },
   images: {
