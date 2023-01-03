@@ -41,7 +41,7 @@ export const DashboardMenu = () => {
             </ul>
           </div>
           <div className='mt-auto p-3 h-16'>
-            <Button type='link' href='/dashboard/products/new' bgColor='bg-indigo-600' textColor='text-white'>
+            <Button type='link' href='/dashboard/products/new' bgColor='indigo-600' textColor='white'>
               <p className='text-sm'> Add product </p>
             </Button>
           </div>
