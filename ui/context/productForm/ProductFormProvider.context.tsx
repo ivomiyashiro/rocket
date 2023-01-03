@@ -1,17 +1,22 @@
 import { useReducer, ReactNode, FormEvent, ChangeEvent, FocusEvent, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
-import { formatPriceNumber, getArrayCombinatios } from 'helpers';
+import { formatPriceNumber, getArrayCombinatios, formatProductFormDataToDB } from 'helpers';
 
 import { IProductFormOption } from './init_state.context';
 import { ProductFormContext, productFormReducer, PRODUCT_FORM_INIT_STATE } from './';
+import { createDBProduct } from 'services';
 
 export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   const [state, dispatch] = useReducer( productFormReducer, PRODUCT_FORM_INIT_STATE );
+  const [isFormValid, setFormValid] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [imgSelectedCount, setImgSelectedCount] = useState(0);
   const [lastWord, setLastWord] = useState('');
+  const router = useRouter();
 
   // VARIANTS GENERATOR ------>
 
@@ -59,7 +64,7 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     if (state.options.length === 0) {
       dispatch({
         type: '[PRODUCT FORM] - Handle variants',
-        payload: { 
+        payload: {
           variants: []
         }
       });
@@ -68,11 +73,83 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   // <------ VARIANTS GENERATOR 
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Submit ----->
+
+  useEffect(() => {
+    if (state.title.value !== '' && state.category.value !== '' && state.vendor.value !== '') {
+      return setFormValid(true);
+    }
+
+    setFormValid(false);
+  }, [state.title, state.vendor, state.category]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(state);
+    let error = false;
+
+    for (let i = 0; i < Object.keys(state).length; i++) {
+      const key = Object.keys(state)[i];
+
+      if (key === 'title' && state[key].value === '') {
+        dispatch({
+          type: '[PRODUCT FORM] - Set title error',
+          payload: { value: 'Title can’t be blank' }
+        });
+        error = true;
+      } else if (key === 'title' && state[key].value !== '') {
+        dispatch({
+          type: '[PRODUCT FORM] - Set title error',
+          payload: { value: '' }
+        });
+      }
+
+      if (key === 'vendor' && state[key].value === '') {
+        dispatch({
+          type: '[PRODUCT FORM] - Set vendor error',
+          payload: { value: 'Vendor can’t be blank' }
+        });
+        error = true;
+      } else if (key === 'vendor' && state[key].value !== '') {
+        dispatch({
+          type: '[PRODUCT FORM] - Set vendor error',
+          payload: { value: '' }
+        });
+      }
+
+      if (key === 'category' && state[key].value === '') {
+        dispatch({
+          type: '[PRODUCT FORM] - Set category error',
+          payload: { value: 'Category can’t be blank' }
+        });
+        error = true;
+      } else if (key === 'category' && state[key].value !== '') {
+        dispatch({
+          type: '[PRODUCT FORM] - Set category error',
+          payload: { value: '' }
+        });
+      }
+    }
+
+    if (error) return;
+
+    const data = formatProductFormDataToDB({ data: state });
+
+    setFormValid(false);
+    setLoading(true);
+
+    const { ok } = await createDBProduct({ data });
+    
+    if (ok) { 
+      dispatch({ type: '[PRODUCT FORM] - Reset store' });
+      return router.push('/dashboard/products'); 
+    }
+
+    setFormValid(true);
+    setLoading(false);
   };
+
+  // <----- Submit
 
   // TITLE AND DESCRIPTION ----->
 
@@ -786,6 +863,8 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     <ProductFormContext.Provider value={ {
       ...state,
       imgSelectedCount,
+      isFormValid,
+      isLoading,
 
       // Methods
       handleSubmit,

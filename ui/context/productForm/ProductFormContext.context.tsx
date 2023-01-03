@@ -4,6 +4,8 @@ import { IProductForm, IProductFormOption } from './';
 
 interface ContextProps extends IProductForm {
   imgSelectedCount: number;
+  isFormValid: boolean;
+  isLoading: boolean;
 
   // Methods
 

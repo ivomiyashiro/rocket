@@ -1,7 +1,10 @@
 import { IProductForm, IProductFormMedia, IProductFormOption, IProductFormVariant } from './';
+import { PRODUCT_FORM_INIT_STATE } from './init_state.context';
 
 type AuthActionType =
+ | { type: '[PRODUCT FORM] - Reset store' }
  | { type: '[PRODUCT FORM] - Change title value', payload: { value: string } }
+ | { type: '[PRODUCT FORM] - Set title error', payload: { value: string }}
  | { type: '[PRODUCT FORM] - Change description value', payload: { value: string } }
  | { type: '[PRODUCT FORM] - Add default product option', payload: { option: IProductFormOption } }
  | { type: '[PRODUCT FORM] - Reset product options' }
@@ -10,7 +13,9 @@ type AuthActionType =
  | { type: '[PRODUCT FORM] - Handle images', payload: { images: IProductFormMedia[] }}
  | { type: '[PRODUCT FORM] - Toggle product status', payload: { status: 'ACTIVE' | 'DRAFT' }}
  | { type: '[PRODUCT FORM] - Change vendor value', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Set vendor error', payload: { value: string }}
  | { type: '[PRODUCT FORM] - Change category value', payload: { value: string }}
+ | { type: '[PRODUCT FORM] - Set category error', payload: { value: string }}
  | { type: '[PRODUCT FORM] - Change product price', payload: { value: string }}
  | { type: '[PRODUCT FORM] - Change product discount price', payload: { value: string }}
  | { type: '[PRODUCT FORM] - Change product quantity', payload: { value: string }}
@@ -21,12 +26,24 @@ export const productFormReducer = ( state: IProductForm, action: AuthActionType 
 
   switch (action.type) {
 
+  case '[PRODUCT FORM] - Reset store':
+    return PRODUCT_FORM_INIT_STATE;
+
   case '[PRODUCT FORM] - Change title value':
     return {
       ...state,
       title: {
         ...state.title,
         value: action.payload.value
+      }
+    };
+
+  case '[PRODUCT FORM] - Set title error':
+    return {
+      ...state,
+      title: {
+        ...state.title,
+        error: action.payload.value
       }
     };
 
@@ -87,12 +104,30 @@ export const productFormReducer = ( state: IProductForm, action: AuthActionType 
       }
     };
 
+  case '[PRODUCT FORM] - Set vendor error':
+    return {
+      ...state,
+      vendor: {
+        ...state.vendor,
+        error: action.payload.value
+      }
+    };
+
   case '[PRODUCT FORM] - Change category value':
     return {
       ...state,
       category: {
         ...state.category,
         value: action.payload.value
+      }
+    };
+
+  case '[PRODUCT FORM] - Set category error':
+    return {
+      ...state,
+      category: {
+        ...state.category,
+        error: action.payload.value
       }
     };
 
