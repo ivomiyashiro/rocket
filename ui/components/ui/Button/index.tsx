@@ -8,6 +8,9 @@ interface Props {
   href?: string;
   bgColor: string;
   textColor: string;
+  outline?: boolean;
+  disabled?: boolean;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -17,28 +20,28 @@ export const Button = ({
   href = '',
   bgColor,
   textColor,
+  outline = false,
+  disabled = false,
+  className = '',
   onClick 
 }: Props) => {
 
-  const className = `w-full h-full py-2 rounded-md flex items-center justify-center gap-1 ${ bgColor } ${ textColor }`;
+  const outlineStyles = outline ? `border border-${ textColor } text-${ textColor }` : '';
+  const styles = `h-full py-2 rounded-md flex items-center justify-center gap-1 bg-${ bgColor } text-${ textColor } ${ outlineStyles } ${ className }`;
 
   if (type === 'a') {
     return (
-      <a href={ href } className={ className } >{ children }</a>
-    );
-  }
-
-  if (type === 'button' || type === 'submit') {
-    return (
-      <button type={ type } className={ className } onClick={ onClick }>{ children }</button>
+      <a href={ href } className={ styles }>{ children }</a>
     );
   }
 
   if (type === 'link') {
     return (
-      <Link href={ href } className={ className } >{ children }</Link>
+      <Link href={ href } className={ styles }>{ children }</Link>
     );
   }
 
-  return <></>;
+  return (
+    <button type={ type } className={ styles } onClick={ onClick } disabled={ disabled }>{ children }</button>
+  );
 };
