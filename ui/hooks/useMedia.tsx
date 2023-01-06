@@ -40,7 +40,7 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
       } else if (e.target.files && e.target.files[i]) {
         uploadImage(file)
           .then(resp => {
-            id ? handleMedia({ id, imageUrl: resp }) : handleMedia({ imgeUrl: resp });
+            id ? handleMedia({ id, imageUrl: resp }) : handleMedia({ imageUrl: resp });
             setLoading(false);
           })
           .catch(error => console.log(error));  
@@ -74,13 +74,14 @@ export const useMedia = ({ id, media, handleMedia }: Props) => {
       } else if (e.dataTransfer.files && e.dataTransfer.files[i]) {
         uploadImage(file)
           .then(resp => {
-            id ? handleMedia({ id, imageUrl: resp }) : handleMedia({ imgeUrl: resp });
+            id ? handleMedia({ id, imageUrl: resp }) : handleMedia({ imageUrl: resp });
             setLoading(false);
           })
-          .catch(error => console.log(error));  
+          .catch(error => console.log(error));
         productMediaLen++;
       }
     }
+
     setDrag(false);
   };
 
