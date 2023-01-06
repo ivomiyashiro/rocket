@@ -4,10 +4,10 @@ import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
 import { formatPriceNumber, getArrayCombinatios, formatProductFormDataToDB } from 'helpers';
+import { createDBProduct } from 'services';
 
 import { IProductFormOption } from './init_state.context';
 import { ProductFormContext, productFormReducer, PRODUCT_FORM_INIT_STATE } from './';
-import { createDBProduct } from 'services';
 
 export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
@@ -695,16 +695,15 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   // IMAGES ------->
 
-  const handleAddGeneralImage = ({ imgeUrl }: { imgeUrl: string }) => {
+  const handleAddGeneralImage = ({ imageUrl }: { imageUrl: string }) => {
     dispatch({
-      type: '[PRODUCT FORM] - Handle images',
+      type: '[PRODUCT FORM] - Handle add images',
       payload: {
         images: [
-          ...state.images,
           {
             id: Math.random().toString(),
             isChecked: false,
-            url: imgeUrl
+            url: imageUrl
           }
         ]
       }
