@@ -7,6 +7,7 @@ export interface IUser {
 }
 
 export interface IProduct {
+  _id?: string;
   title: string;
   description: string;
   options?: { name: string; values: string[] }[];
@@ -37,3 +38,5 @@ export interface IOption {
   name: string;
   values: { id: number; name: string }[];
 }
+
+export type TSort = 'A - Z' | 'Z - A' | 'Low inventory' | 'High inventory' | 'Lowest Price' | 'Highest Price'
