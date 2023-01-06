@@ -30,7 +30,7 @@ export const Media = () => {
     handleDragEnter,
     handleDragLeave,
   } = useMedia({ media: images, handleMedia: handleAddGeneralImage });
-  
+
   return (
     <DashboardCard className='p-5'>
       {
@@ -75,7 +75,7 @@ export const Media = () => {
           isLoading 
           && 
           <div className='flex items-center justify-center pointer-events-none top-0 w-full h-full z-40 absolute border border-dashed border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
-            <Spinner color='indigo-600' />
+            <Spinner color='fill-indigo-600' size={ 10 } />
           </div>
         }
         {
