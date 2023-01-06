@@ -18,7 +18,7 @@ export const Popup = ({
   handleClose, onClick 
 }: Props) => {
 
-  const btnColor = primaryBtnType === 'danger' ? 'bg-red-500' : primaryBtnType === 'normal' ? 'bg-indigo-600' : 'bg-green-500';
+  const btnColor = primaryBtnType === 'danger' ? 'red-500' : primaryBtnType === 'normal' ? 'indigo-600' : 'green-500';
 
   return (
     <div className={ `bg-white rounded-lg ${ className }` }>
@@ -42,9 +42,10 @@ export const Popup = ({
         <div className='w-24'>
           <Button 
             type='button'
-            textColor='text-white' 
+            textColor='white' 
             bgColor={ btnColor }
             onClick={ onClick }
+            className='w-full'
           >
             <p className='text-sm'>{ primaryBtnText }</p>
           </Button>
