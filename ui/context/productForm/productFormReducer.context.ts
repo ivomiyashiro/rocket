@@ -10,6 +10,7 @@ type AuthActionType =
  | { type: '[PRODUCT FORM] - Reset product options' }
  | { type: '[PRODUCT FORM] - Handle options', payload: { options: IProductFormOption[] } }
  | { type: '[PRODUCT FORM] - Handle variants', payload: { variants: IProductFormVariant[] } }
+ | { type: '[PRODUCT FORM] - Handle add images', payload: { images: IProductFormMedia[] }}
  | { type: '[PRODUCT FORM] - Handle images', payload: { images: IProductFormMedia[] }}
  | { type: '[PRODUCT FORM] - Toggle product status', payload: { status: 'ACTIVE' | 'DRAFT' }}
  | { type: '[PRODUCT FORM] - Change vendor value', payload: { value: string }}
@@ -81,6 +82,15 @@ export const productFormReducer = ( state: IProductForm, action: AuthActionType 
     return {
       ...state,
       variants: [ ...action.payload.variants ]
+    };
+
+  case '[PRODUCT FORM] - Handle add images':
+    return {
+      ...state,
+      images: [ 
+        ...state.images,
+        ...action.payload.images 
+      ]
     };
 
   case '[PRODUCT FORM] - Handle images':
