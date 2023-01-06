@@ -28,7 +28,7 @@ export const TextArea = ({
         name={ name }
         id={ id }
         onChange={ onChange }
-        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md resize-none h-32 outline outline-transparent
+        className={ `border border-gray-200 bg-gray-100 w-full py-2 px-3 rounded-md resize-none h-32 outline outline-transparent text-sm
           ${ !!error &&  'border-red-500 bg-red-100 text-red-500 placeholder-red-400'} 
           ${ !!error ? 'focus:outline-red-500' : 'focus:outline-indigo-600' }
           ` 
