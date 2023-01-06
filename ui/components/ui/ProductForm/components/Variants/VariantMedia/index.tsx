@@ -30,7 +30,7 @@ export const VariantMedia = ({ variantID, media }: Props) => {
     handleDragEnter,
     handleDragLeave,
   } = useMedia({ id: variantID, media, handleMedia: handleVariantMedia });
-
+  console.log(isLoading);
   return (
     <div className='relative'>
       <div className='flex justify-between'>
@@ -87,7 +87,7 @@ export const VariantMedia = ({ variantID, media }: Props) => {
           isLoading
           &&
           <div className='flex items-center justify-center pointer-events-none top-0 w-full h-full z-30 absolute border border-dashed border-indigo-600 bg-indigo-200 rounded-md text-indigo-600'>
-            <Spinner color='indigo-600' />
+            <Spinner color='fill-red-600' />
           </div>
         }
       </SortableContainer>
