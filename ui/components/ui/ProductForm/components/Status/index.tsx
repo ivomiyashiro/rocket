@@ -9,11 +9,13 @@ export const Status = () => {
 
   return (
     <DashboardCard className='p-5' title='Product status'>
-      <Select
-        id={ id }
-        options={ ['Active', 'Draft'] }
-        onChange={ toggleProductStatus }
-      />
+      <div className='h-[38px]'>
+        <Select
+          id={ id }
+          options={ ['Active', 'Draft'] }
+          onChange={ toggleProductStatus }
+        />
+      </div>
     </DashboardCard>
   );
 };
