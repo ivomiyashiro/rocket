@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { ChangeEvent, useContext, useRef } from 'react';
 import Image from 'next/image';
 
 import { IProductFormVariant, ProductFormContext } from 'context';
@@ -64,7 +64,7 @@ export const VariantTableRow = ({ variant }: Props) => {
           inputValue={ variant.price }
           withError={ false }
           onBlur={ () => handleFormatPrice({ id: variant.id }) }
-          onChange={ (e) => handleVariantPrice({ id: variant.id, e }) }
+          onChange={ (e: ChangeEvent<HTMLInputElement>) => handleVariantPrice({ id: variant.id, e }) }
         />
       </td>
       <td className='text-sm font-normal text-gray-600 text-left whitespace-nowrap px-4 py-2' style={ minWith }>
@@ -77,7 +77,7 @@ export const VariantTableRow = ({ variant }: Props) => {
           inputValue={ variant.discountPrice }
           withError={ false }
           onBlur={ () => handleFormatDiscountPrice({ id: variant.id }) }
-          onChange={ (e) => handleDiscountPrice({ id: variant.id, e }) }
+          onChange={ (e: ChangeEvent<HTMLInputElement>) => handleDiscountPrice({ id: variant.id, e }) }
         />  
       </td>
       <td className='text-sm font-normal text-gray-600 text-left whitespace-nowrap px-4 py-2' style={ { minWidth: '100px' } }  >
@@ -89,7 +89,7 @@ export const VariantTableRow = ({ variant }: Props) => {
           inputValue={ variant.inventory }
           withError={ false }
           withSpinner={ true }
-          onChange={ (e) => handleInventoryChange({ id: variant.id, e }) }
+          onChange={ (e: ChangeEvent<HTMLInputElement>) => handleInventoryChange({ id: variant.id, e }) }
           handleIncreaseQuantity={ () => handleIncreaseInventory({ id: variant.id }) }
           handleDecreaseQuantity={ () => handleDecreaseInventory({ id: variant.id }) }
         />  
@@ -102,7 +102,7 @@ export const VariantTableRow = ({ variant }: Props) => {
           placeholder=''
           inputValue={ variant.sku }
           withError={ false }
-          onChange={ (e) => handleSKU({ id: variant.id, e }) }
+          onChange={ (e: ChangeEvent<HTMLInputElement>) => handleSKU({ id: variant.id, e }) }
         />  
       </td>
       <td className='text-sm font-normal text-gray-600 text-left whitespace-nowrap px-4 py-2' style={ minWith }>
@@ -113,7 +113,7 @@ export const VariantTableRow = ({ variant }: Props) => {
           placeholder=''
           inputValue={ variant.barcode }
           withError={ false }
-          onChange={ (e) => handleBarcode({ id: variant.id, e }) }
+          onChange={ (e: ChangeEvent<HTMLInputElement>) => handleBarcode({ id: variant.id, e }) }
         />  
       </td>
       <td className=''>
