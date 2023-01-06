@@ -3,3 +3,4 @@ export * from './checkDBToken.service';
 export * from './createDBNewUser.service';
 export * from './uploadImage.service';
 export * from './createDBProduct.service';
+export * from './getDBProducts.service';
