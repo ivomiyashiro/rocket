@@ -40,7 +40,7 @@ export interface IVariant {
   discountPrice: number;
   sku: string;
   barcode: string;
-  image: string;
+  images: string[];
 }
 
 export interface IOrder extends Document {
