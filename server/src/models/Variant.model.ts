@@ -22,8 +22,9 @@ export const VariantScheme = new Schema<IVariant>({
     type: Number,
     required: true
   },
-  image: {
-    type: String,
+  images: {
+    type: [String],
+    default: ['']
   }
 }, { 
   timestamps: {
