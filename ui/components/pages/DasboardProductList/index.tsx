@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { TSort } from 'interfaces';
 
 import { useProducts } from 'hooks';
 
-import { Button, DashboardCard, Tab } from 'components/ui';
-import { NoProductsMessage, ProductsTable, ProductsTableHeader } from './components';
+import { Button, DashboardCard, Tab, Pagination } from 'components/ui';
+import { NoProductsMessage, ProductsTable, ProductsTableHeader, ProductsTableSkeleton } from './components';
 
 export const DashboardProductList = () => {
 
   const [activeTab, setActiveTab] = useState('All');
   const [limit, setLimit] = useState(10);
   const [sort, setSort] = useState<TSort>('A - Z');
+  const [page, setPage] = useState(1);
   const [filters, setFilter] = useState({});
-  const { products } = useProducts({ limit, sort, filters });
+  const { products, pages, isLoading, isFirstLoadLoading, handleProducts } = useProducts({ limit, sort, page, filters });
 
+  useEffect(() => {
+    if (activeTab === 'All') {
+      setFilter({});
+    } else if (activeTab === 'Active') {
+      setFilter({ status: 'ACTIVE' });
+    } else {
+      setFilter({ status: 'DRAFT' }); 
+    }
+  }, [activeTab]);
+  console.log(Object.keys(filters).length !== 0);
   return (
     <div>
       <div className='flex justify-between items-center'>
@@ -30,18 +41,36 @@ export const DashboardProductList = () => {
       <div className='mt-4'>
         <DashboardCard>
           {
-            products.length !== 0
-              ? (
-                <Tab
-                  tabs={ ['All', 'Active', 'Draft'] }
-                  activeTab={ activeTab } 
-                  handleActiveTab={ setActiveTab }
-                >
-                  <ProductsTableHeader handleLimit={ setLimit } handleSort={ setSort } />
-                  <ProductsTable products={ products } />
-                </Tab>
+            isFirstLoadLoading
+              ? <ProductsTableSkeleton />
+              : (
+                products.length === 0 && Object.keys(filters).length === 0
+                  ? <NoProductsMessage />
+                  : (
+                    <Tab
+                      tabs={ ['All', 'Active', 'Draft'] }
+                      activeTab={ activeTab } 
+                      handleActiveTab={ setActiveTab }
+                    >
+                      <ProductsTableHeader handleLimit={ setLimit } handleSort={ setSort } />
+                      <ProductsTable 
+                        products={ products }
+                        activeTab={ activeTab }
+                        isLoading={ isLoading } 
+                        handleProducts={ handleProducts } 
+                      />
+                      {
+                        pages > 1
+                      &&
+                      <Pagination 
+                        currentPage={ page }
+                        totalPages={ pages }
+                        handlePage={ setPage } 
+                      />
+                      }
+                    </Tab>
+                  )
               )
-              : <NoProductsMessage />
           }
         </DashboardCard>
       </div>

@@ -1,32 +1,54 @@
 import { useEffect, useState } from 'react';
-import { IProduct } from 'interfaces';
+import { IProduct, TSort } from 'interfaces';
 import { getDBProducts } from 'services';
 import { formatSortParams } from 'helpers';
 
 interface Props {
   limit: number;
-  sort: 'A - Z' | 'Z - A' | 'Low inventory' | 'High inventory' | 'Lowest Price' | 'Highest Price';
+  page: number;
+  sort: TSort;
   filters: any;
 }
 
-export const useProducts = ({ limit, sort, filters }: Props) => {
+export const useProducts = ({ limit, sort, page, filters }: Props) => {
   
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [isLoading, setLoading] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [isFirstLoadLoading, setfirstLoadLoading] = useState(false);
   const [pages, setPages] = useState(0);
 
   useEffect(() => {
     const { orderBy, sortBy } = formatSortParams({ sort });
 
-    getDBProducts({ limit, orderBy, sortBy, filters })
-      .then(({ products, totalPages }) => {
-        setProducts(products);
-        setPages(totalPages);
-      })
-      .catch(error => console.log(error));
-  }, [limit, sort, filters]);
+    if (firstLoad) {
+      setfirstLoadLoading(true);
+      getDBProducts({ limit, orderBy, sortBy, page, filters })
+        .then(({ products, totalPages }) => {
+          setProducts(products);
+          setPages(totalPages);
+        })
+        .catch(error => console.log(error))
+        .finally(() => { setfirstLoadLoading(false); setFirstLoad(false); } );
+    } else {
+      setLoading(true);
+      getDBProducts({ limit, orderBy, sortBy, page, filters })
+        .then(({ products, totalPages }) => {
+          setProducts(products);
+          setPages(totalPages);
+        })
+        .catch(error => console.log(error))
+        .finally(() => setLoading(false) );
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limit, sort, filters, page]);
 
   return {
     products,
-    pages
+    pages,
+    isLoading,
+    isFirstLoadLoading,
+    handleProducts: setProducts
   };
 };

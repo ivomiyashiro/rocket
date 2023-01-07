@@ -5,9 +5,10 @@ interface Props {
   orderBy: string;
   sortBy: string;
   filters: any;
+  page: number;
 }
 
-export const getDBProducts = async ({ limit, orderBy, sortBy, filters }: Props) => {
+export const getDBProducts = async ({ limit, orderBy, sortBy, page, filters }: Props) => {
   try {
     const { data } = await axios.get(
       process.env.NEXT_PUBLIC_SERVER_ENDPOINT as string + '/products', {
@@ -15,6 +16,7 @@ export const getDBProducts = async ({ limit, orderBy, sortBy, filters }: Props) 
           limit,
           orderBy,
           sortBy,
+          page,
           filters: JSON.stringify(filters)
         }
       },
