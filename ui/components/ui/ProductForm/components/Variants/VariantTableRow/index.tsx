@@ -32,7 +32,7 @@ export const VariantTableRow = ({ variant }: Props) => {
   return (
     <tr className='border-t items-center relative'>
       <td className='text-sm font-normal text-gray-600 text-left whitespace-nowrap px-4 pl-2 py-2 sticky left-0 min bg-white'> 
-        <button type='button' className='border flex justify-center items-center p-4 w-full h-[54px] rounded-md border-dashed cursor-pointer relative' onClick={ () => handleTogglePopup({ id: variant.id }) }>
+        <button type='button' className='border flex justify-center items-center w-full h-[54px] min-w-[54px] rounded-md border-dashed cursor-pointer relative' onClick={ () => handleTogglePopup({ id: variant.id }) }>
           {
             !!!featImg
               ? <ImageIcon size='20px' />
@@ -42,7 +42,7 @@ export const VariantTableRow = ({ variant }: Props) => {
                   alt={ variant.id } 
                   sizes='33vw'
                   placeholder="blur"
-                  style={ { objectFit: 'contain', padding: '2px' } }
+                  style={ { objectFit: 'contain', padding: '4px' } }
                   blurDataURL={ featImg } 
                   fill
                 />
