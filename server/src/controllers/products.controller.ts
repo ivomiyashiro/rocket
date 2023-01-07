@@ -86,10 +86,10 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const deleteProduct = async (req: Request, res: Response) => {
 
-  const productsIDs = req.params.id;
+  const productsIDs =  JSON.parse(req.params.id);
 
   try {
-    const { deletedCount } = await Product.deleteMany({ id: { $in: productsIDs } });
+    const { deletedCount } = await Product.deleteMany({ _id: { $in: productsIDs } });
 
     return res.json({
       ok: true,
@@ -108,11 +108,11 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
   
-  const id = req.params.id;
-  const update = req.body.data;
+  const productsIDs =  JSON.parse(req.params.id);
+  const update = req.body;
 
   try {
-    await Product.findOneAndUpdate({ id }, update);
+    await Product.updateMany({ _id: { $in: productsIDs } }, update);
 
     return res.json({
       ok: true,
