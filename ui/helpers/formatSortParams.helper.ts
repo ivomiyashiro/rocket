@@ -12,7 +12,7 @@ export const formatSortParams = ({ sort }: Props) => {
 
   if (sort === 'A - Z') {
     orderBy = 'asc';
-  } else {
+  } else if (sort === 'Z - A') {
     orderBy = 'desc';
   }
 
@@ -22,7 +22,7 @@ export const formatSortParams = ({ sort }: Props) => {
 
   if (sort === 'High inventory') {
     orderBy = 'asc';
-  } else {
+  } else if (sort === 'Low inventory') {
     orderBy = 'desc';
   }
 
@@ -32,7 +32,7 @@ export const formatSortParams = ({ sort }: Props) => {
 
   if (sort === 'Highest Price') {
     orderBy = 'asc';
-  } else {
+  } else if (sort === 'Lowest Price') {
     orderBy = 'desc';
   }
 
