@@ -24,3 +24,5 @@ export * from './Sort';
 export * from './Eye';
 export * from './Image';
 export * from './NoProducts';
+export * from './ChevronLeft';
+export * from './ChevronRight';
