@@ -5,14 +5,16 @@ import { Select } from 'components/ui';
 import { Searchbar } from '../';
 
 interface Props {
+  searchValue: string;
+  handleSearch: Dispatch<SetStateAction<string>>;
   handleLimit: Dispatch<SetStateAction<number>>;
   handleSort: Dispatch<SetStateAction<TSort>>;
 }
 
-export const ProductsTableHeader = ({ handleLimit, handleSort }: Props) => {
+export const ProductsTableHeader = ({ searchValue, handleSearch, handleLimit, handleSort }: Props) => {
   return (
     <div className='px-4 py-3 flex gap-4 justify-between items-center'>
-      <Searchbar />
+      <Searchbar searchValue={ searchValue } handleFilters={ handleSearch } />
       <div className='flex gap-4 items-center h-[38px]'>
         <Select 
           id='select-limit'

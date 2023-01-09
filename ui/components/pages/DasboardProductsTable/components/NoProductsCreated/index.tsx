@@ -1,7 +1,7 @@
 import { NoProductsIcon } from 'components/icons';
 import { Button } from 'components/ui';
 
-export const NoProductsMessage = () => {
+export const NoProductsCreated = () => {
   return (
     <div className='flex flex-col items-center justify-center p-12'>
       <NoProductsIcon size='226' />
