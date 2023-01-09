@@ -8,9 +8,10 @@ interface Props {
   page: number;
   sort: TSort;
   filters: any;
+  search: string;
 }
 
-export const useProducts = ({ limit, sort, page, filters }: Props) => {
+export const useProducts = ({ limit, sort, page, filters, search }: Props) => {
   
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ export const useProducts = ({ limit, sort, page, filters }: Props) => {
 
     if (firstLoad) {
       setfirstLoadLoading(true);
-      getDBProducts({ limit, orderBy, sortBy, page, filters })
+      getDBProducts({ limit, orderBy, sortBy, page, filters, search })
         .then(({ products, totalPages }) => {
           setProducts(products);
           setPages(totalPages);
@@ -32,7 +33,7 @@ export const useProducts = ({ limit, sort, page, filters }: Props) => {
         .finally(() => { setfirstLoadLoading(false); setFirstLoad(false); } );
     } else {
       setLoading(true);
-      getDBProducts({ limit, orderBy, sortBy, page, filters })
+      getDBProducts({ limit, orderBy, sortBy, page, filters, search })
         .then(({ products, totalPages }) => {
           setProducts(products);
           setPages(totalPages);
@@ -42,7 +43,7 @@ export const useProducts = ({ limit, sort, page, filters }: Props) => {
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, sort, filters, page]);
+  }, [limit, sort, filters, page, search]);
 
   return {
     products,
