@@ -2,9 +2,9 @@ import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 interface Props {
   tabs: string[];
-  activeTab: string;
+  activeTab: 'All' | 'Active' | 'Draft';
   children: ReactNode;
-  handleActiveTab: Dispatch<SetStateAction<string>>;
+  handleActiveTab: Dispatch<SetStateAction<'All' | 'Active' | 'Draft'>>;
 }
 
 export const Tab = ({ tabs, activeTab, children, handleActiveTab }: Props) => {
@@ -15,7 +15,7 @@ export const Tab = ({ tabs, activeTab, children, handleActiveTab }: Props) => {
         <ul className='flex h-[53px] gap-2'>
           {
             tabs.map((tabName, i) => (
-              <li key={ i } className={ `flex items-center border-b-2 border-transparent content-center cursor-pointer hover:text-gray-700 ${ activeTab === tabName ? 'border-b-indigo-600 text-gray-700' : 'text-gray-500 hover:border-b-gray-400'}` } onClick={ () => handleActiveTab(tabName) }>
+              <li key={ i } className={ `flex items-center border-b-2 border-transparent content-center cursor-pointer hover:text-gray-700 ${ activeTab === tabName ? 'border-b-indigo-600 text-gray-700' : 'text-gray-500 hover:border-b-gray-400'}` } onClick={ () => handleActiveTab(tabName as 'All' | 'Active' | 'Draft') }>
                 <a className='px-[1rem]' id={ tabName } role={ tabName }>
                   <span className='min-w-[3.125rem] relative'>
                     <span className='text-sm'> { tabName } </span>
