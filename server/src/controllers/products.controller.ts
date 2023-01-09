@@ -9,8 +9,9 @@ const DEFAULT_ORDER_BY = 'asc';
 
 export const getAllProducts = async (req: Request, res: Response) => {
 
-  const { sortBy: reqSortBy, orderBy: reqOrderBy, limit: reqLimit, page: reqPage, filters: reqFilters }: any = req.query;
+  const { sortBy: reqSortBy, orderBy: reqOrderBy, limit: reqLimit, page: reqPage, filters: reqFilters, search }: any = req.query;
 
+  let products;
   const filters = JSON.parse(reqFilters) || DEFAULT_FILTERS;
   const orderBy = reqOrderBy || DEFAULT_ORDER_BY;
   const sortBy = reqSortBy || DEFAULT_SORT_BY;
@@ -18,11 +19,23 @@ export const getAllProducts = async (req: Request, res: Response) => {
   const page = Number(reqPage) || DEFAULT_PAGE;
 
   try {
-    const products = await Product.find(filters)
-      .limit(limit)
-      .skip((page - 1) * limit)
-      .sort([[sortBy, orderBy]])
-      .exec();
+    if (!!search) {
+      products = await Product.find({ $or: [
+        { title: { $regex: search, $options: 'i' } },
+        { category: { $regex: search, $options: 'i' } },
+        { vendor: { $regex: search, $options: 'i' } }] 
+      })
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .sort([[sortBy, orderBy]])
+        .exec();
+    } else {
+      products = await Product.find(filters)
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .sort([[sortBy, orderBy]])
+        .exec();
+    }
 
     const count = await Product.count();
 
@@ -140,13 +153,8 @@ export const searchProducts = async (req: Request, res: Response) => {
   const page = Number(reqPage) || DEFAULT_PAGE;
 
   try {
-    const products = await Product.find({
-      $or: [
-        { title: { $regex: search, $options: 'i' } },
-        { category: { $regex: search, $options: 'i' } },
-        { vendor: { $regex: search, $options: 'i' } },
-      ]
-    }).limit(limit)
+    const products = await Product.find({ $text: { $search: search } })
+      .limit(limit)
       .skip((page - 1) * limit)
       .sort([[sortBy, orderBy]])
       .exec();
