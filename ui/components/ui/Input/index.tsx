@@ -45,7 +45,7 @@ export const Input = ({
           <input 
             type={ INPUT_TYPE }
             placeholder={ placeholder || '' }
-            value={ inputValue }
+            value={ inputValue || '' }
             name={ name }
             id={ id }
             onBlur={ onBlur }
