@@ -2,7 +2,7 @@ import { getServerSideProps } from 'pages/dashboard';
 
 import { ProductFormProvider } from 'context';
 
-import { AddNewProductPage as Page } from 'components/pages';
+import { ProductFormPage as Page } from 'components/pages';
 import { DashboardLayout } from 'components/layouts';
 
 const AddNewProductPage = () => {
