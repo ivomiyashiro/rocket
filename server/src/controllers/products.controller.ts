@@ -59,11 +59,11 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const getOneProduct = async (req: Request, res: Response) => {
 
   try {
-    const products = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id);
 
     return res.json({
       ok: true,
-      products
+      product
     });
     
   } catch (error) {
