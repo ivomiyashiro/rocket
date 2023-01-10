@@ -63,7 +63,7 @@ interface ContextProps extends IProductForm {
 
   // Status --->
 
-  toggleProductStatus: () => void;
+  handleProductStatus: ({ value }: { value: string }) => void;
 
   // <--- Status
 

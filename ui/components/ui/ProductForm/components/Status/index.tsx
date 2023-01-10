@@ -1,11 +1,11 @@
-import { useContext, useId } from 'react';
+import { ChangeEvent, useContext, useId } from 'react';
 import { ProductFormContext } from 'context';
 import { DashboardCard, Select } from 'components/ui';
 
 export const Status = () => {
 
   const id = useId();
-  const { toggleProductStatus } = useContext(ProductFormContext);
+  const { handleProductStatus, status } = useContext(ProductFormContext);
 
   return (
     <DashboardCard className='p-5' title='Product status'>
@@ -13,7 +13,8 @@ export const Status = () => {
         <Select
           id={ id }
           options={ ['Active', 'Draft'] }
-          onChange={ toggleProductStatus }
+          value={ status }
+          onChange={ (e: ChangeEvent<HTMLSelectElement>) => handleProductStatus({ value: e.target.value.toUpperCase() }) }
         />
       </div>
     </DashboardCard>
