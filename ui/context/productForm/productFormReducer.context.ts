@@ -1,7 +1,9 @@
+import { IProduct } from 'interfaces';
 import { IProductForm, IProductFormMedia, IProductFormOption, IProductFormVariant } from './';
 import { PRODUCT_FORM_INIT_STATE } from './init_state.context';
 
 type AuthActionType =
+ | { type: '[PRODUCT FORM] - Load data to edit product', payload: { product: IProduct } }
  | { type: '[PRODUCT FORM] - Reset store' }
  | { type: '[PRODUCT FORM] - Change title value', payload: { value: string } }
  | { type: '[PRODUCT FORM] - Set title error', payload: { value: string }}
@@ -26,6 +28,51 @@ type AuthActionType =
 export const productFormReducer = ( state: IProductForm, action: AuthActionType ): IProductForm => {
 
   switch (action.type) {
+    
+  case '[PRODUCT FORM] - Load data to edit product':
+    return {
+      title: { ...state.title, value: action.payload.product.title },
+      description: { ...state.description, value: action.payload.product.description },
+      price: action.payload.product.price,
+      inventory: action.payload.product.inventory || '0',
+      sku: action.payload.product.sku || '',
+      barcode: action.payload.product.barcode || '',
+      discountPrice: action.payload.product.discountPrice,
+      options: action.payload.product.options?.map(opt => ({
+        ...opt, 
+        id: opt._id,
+        name: { error: '', value: opt.name },
+        values: opt.values.map(val => ({ 
+          id: Math.random().toString(),
+          name: val,
+          error: ''
+        })),
+        editing: false
+      })) || [],
+      variants: action.payload.product.variants?.map(variant => ({
+        id: variant._id,
+        name: variant.name,
+        inventory: variant.inventory || '0',
+        price: variant.price,
+        discountPrice: variant.discountPrice,
+        sku: '',
+        barcode: variant.barcode,
+        images: variant.images.map(img => ({
+          id: Math.random().toString(),
+          url: img,
+          isChecked: false
+        })),
+        popupOpen: false
+      })) || [],
+      vendor: { value: action.payload.product.vendor, error: '' },
+      category: { value: action.payload.product.category, error: '' },
+      status: action.payload.product.status.toUpperCase() as 'ACTIVE' | 'DRAFT',
+      images: action.payload.product.images.map(img => ({
+        id: Math.random().toString(),
+        url: img,
+        isChecked: false
+      }))
+    };
 
   case '[PRODUCT FORM] - Reset store':
     return PRODUCT_FORM_INIT_STATE;

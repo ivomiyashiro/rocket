@@ -6,3 +6,4 @@ export * from './createDBProduct.service';
 export * from './getDBProducts.service';
 export * from './deleteDBProducts.service';
 export * from './updateDBProducts.service';
+export * from './getDBProduct.service';

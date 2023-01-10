@@ -17,7 +17,7 @@ export const ProductList = ({ products, checkedState, handleCheckboxChange }: Pr
           let featImg = '';
 
           product.variants?.length !== 0
-            ? featImg = product.variants![0].images[0] 
+            ? featImg = product.variants![0].images[0] || ''
             : featImg = product.images[0] || '';
 
           return (

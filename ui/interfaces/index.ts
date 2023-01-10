@@ -10,7 +10,7 @@ export interface IProduct {
   _id?: string;
   title: string;
   description: string;
-  options?: { name: string; values: string[] }[];
+  options?: { _id: string; name: string; values: string[] }[];
   variants?: IVariant[];
   price?: string;
   discountPrice?: string;
@@ -24,10 +24,11 @@ export interface IProduct {
 }
 
 export interface IVariant {
+  _id: string;
   name: string;
-  inventory: number;
-  price: number;
-  discountPrice: number;
+  inventory: string;
+  price: string;
+  discountPrice: string;
   sku: string;
   barcode: string;
   images: string[];

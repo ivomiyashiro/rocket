@@ -27,11 +27,11 @@ export const ProductsTable = ({ products, isLoading, activeTab, searchValue, han
   } = useProductTable({ products, handleProducts });
 
   return (
-    <div className='relative'>
+    <div className='flex justify-center relative'>
       {
         isLoading
         &&
-        <div className='absolute flex items-center bg-[#EBF9FB] shadow-sm p-2 px-[1rem] z-10 top-[-3px] w-full'>
+        <div className='absolute flex items-center gap-2 bg-[#EBF9FB] shadow-sm p-2 px-[1rem] z-10 top-[-3px] w-full'>
           <Spinner size={ 4 } color='fill-sky-600' />
           <p className='text-sm text-sky-600'>Loading products...</p>
         </div>
@@ -41,7 +41,7 @@ export const ProductsTable = ({ products, isLoading, activeTab, searchValue, han
           products.length === 0
             ? <NoProductsFound activeTab={ activeTab } searchValue={ searchValue } />
             :  (
-              <div className='flex justify-center relative'>
+              <div className='flex relative'>
                 <table className='w-full min-w-full border-collapse'>
                   <thead>
                     <tr>
@@ -71,19 +71,19 @@ export const ProductsTable = ({ products, isLoading, activeTab, searchValue, han
                     />
                   </tbody>
                 </table>
-                {
-                  checkedState.filter(Boolean).length > 0
-                  &&
-                  <ProductTableMenu
-                    handleSetActiveProduct={ handleSetActiveProduct }
-                    handleSetDrafProduct={ handleSetDrafProduct }
-                    handleDeleteProduct={ handleDeleteProduct }
-                  />
-                }
               </div>
             )
         }
       </div>
+      {
+        checkedState.filter(Boolean).length > 0
+        &&
+        <ProductTableMenu
+          handleSetActiveProduct={ handleSetActiveProduct }
+          handleSetDrafProduct={ handleSetDrafProduct }
+          handleDeleteProduct={ handleDeleteProduct }
+        />
+      }
     </div>
   );
 };

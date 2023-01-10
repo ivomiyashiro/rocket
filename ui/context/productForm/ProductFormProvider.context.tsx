@@ -4,23 +4,47 @@ import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
 import { formatPriceNumber, getArrayCombinatios, formatProductFormDataToDB } from 'helpers';
-import { createDBProduct } from 'services';
+import { createDBProduct, updateDBProducts } from 'services';
 
 import { IProductFormOption } from './init_state.context';
 import { ProductFormContext, productFormReducer, PRODUCT_FORM_INIT_STATE } from './';
+import { IProduct } from 'interfaces';
 
-export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
+interface Props {
+  product?: IProduct;
+  children: ReactNode;
+}
+
+export const ProductFormProvider = ({ product, children }: Props) => {
 
   const [state, dispatch] = useReducer( productFormReducer, PRODUCT_FORM_INIT_STATE );
   const [isFormValid, setFormValid] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [imgSelectedCount, setImgSelectedCount] = useState(0);
   const [lastWord, setLastWord] = useState('');
+  const [firstLoad, setFirstLoad] = useState(true);
   const router = useRouter();
+
+  // EDIT PRODUCT CHECK ----->
+
+  useEffect(() => {
+    if (!!product) {
+      dispatch({
+        type: '[PRODUCT FORM] - Load data to edit product',
+        payload: { product }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // <----- EDIT PRODUCT CHECK 
 
   // VARIANTS GENERATOR ------>
 
   useEffect(() => {
+    // Check if it's a first load when editing product 
+    if (firstLoad && !!product) return setFirstLoad(false);
+
     const optValues = state.options.map(opt => opt.values.map(val => val.name));
     // Check if there are options created.
     if (optValues.length === 1 && optValues[0].length === 1 && optValues[0].includes('')) return;
@@ -61,7 +85,7 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
   }, [state.options]);
 
   useEffect(() => {
-    if (state.options.length === 0) {
+    if (state.options.length === 0 && !product) {
       dispatch({
         type: '[PRODUCT FORM] - Handle variants',
         payload: {
@@ -69,7 +93,7 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
         }
       });
     }
-  }, [state.options]);
+  }, [state.options, product]);
 
   // <------ VARIANTS GENERATOR 
 
@@ -138,15 +162,18 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
     setFormValid(false);
     setLoading(true);
 
-    const { ok } = await createDBProduct({ data });
-    
-    if (ok) { 
-      dispatch({ type: '[PRODUCT FORM] - Reset store' });
-      return router.push('/dashboard/products'); 
+    if (product) {
+      const { ok } = await updateDBProducts({ productsIDs: [product._id!], data });
+      if (ok) dispatch({ type: '[PRODUCT FORM] - Reset store' });
+    } else {
+      const { ok } = await createDBProduct({ data });
+      if (ok) dispatch({ type: '[PRODUCT FORM] - Reset store' });
     }
-
+    
     setFormValid(true);
     setLoading(false);
+
+    return router.push('/dashboard/products'); 
   };
 
   // <----- Submit
@@ -762,20 +789,11 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
 
   // STATUS ------->
 
-  const toggleProductStatus = () => {
-    if (state.status === 'ACTIVE') {
-      return dispatch({
-        type: '[PRODUCT FORM] - Toggle product status',
-        payload: {
-          status: 'DRAFT'
-        }
-      });
-    }
-
-    return dispatch({
+  const handleProductStatus = ({ value }: { value: string }) => {
+    dispatch({
       type: '[PRODUCT FORM] - Toggle product status',
       payload: {
-        status: 'ACTIVE'
+        status: value as 'DRAFT' | 'ACTIVE'
       }
     });
   };
@@ -906,7 +924,7 @@ export const ProductFormProvider = ({ children }: { children: ReactNode }) => {
       handleToggleGeneralImageCheckState,
       handleGeneralImageSortEnd,
 
-      toggleProductStatus,
+      handleProductStatus,
 
       handleVendorValue,
       handleCategoryValue,

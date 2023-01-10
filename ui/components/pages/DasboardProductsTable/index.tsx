@@ -56,6 +56,8 @@ export const DashboardProductsTable = () => {
                     >
                       <ProductsTableHeader
                         searchValue={ search }
+                        limit={ limit }
+                        sort={ sort }
                         handleSearch={ setSearch }
                         handleLimit={ setLimit } 
                         handleSort={ setSort } 
